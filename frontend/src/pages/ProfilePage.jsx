@@ -1,134 +1,134 @@
 /**
  * pages/ProfilePage.jsx
- * User profile: update name, currency preference, theme, change password
+ * Profile management with currency selector built-in
  */
 
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../context/AuthContext';
+import { useCurrency, CURRENCIES } from '../context/CurrencyContext';
 import { useTheme } from '../context/ThemeContext';
-import { FiUser, FiSun, FiMoon, FiMonitor } from 'react-icons/fi';
+import { FiUser, FiMail, FiSave, FiGlobe } from 'react-icons/fi';
 import toast from 'react-hot-toast';
-
-const CURRENCIES = ['USD', 'EUR', 'GBP', 'INR', 'JPY', 'CAD', 'AUD'];
-const THEMES = [
-  { value: 'light', label: 'Light', icon: FiSun },
-  { value: 'dark', label: 'Dark', icon: FiMoon },
-  { value: 'system', label: 'System', icon: FiMonitor },
-];
 
 export default function ProfilePage() {
   const { user, updateUser } = useAuth();
+  const { currency, setCurrency } = useCurrency();
   const { theme, setTheme } = useTheme();
+  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting, isDirty },
-  } = useForm({
-    defaultValues: { name: user?.name, currency: user?.currency || 'USD' },
-  });
+  useEffect(() => {
+    if (user) reset({ name: user.name, email: user.email });
+  }, [user, reset]);
 
   const onSubmit = async (data) => {
     try {
-      await updateUser(data);
-    } catch (err) {
-      toast.error(err.response?.data?.message || 'Update failed');
+      await updateUser({ name: data.name, currency, theme });
+    } catch {
+      toast.error('Failed to update profile');
     }
   };
 
-  const inputClass =
-    'w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500';
-  const labelClass = 'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5';
+  const inp = 'w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500';
+  const lbl = 'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5';
 
   return (
-    <div className="max-w-xl space-y-6">
+    <div className="max-w-2xl space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Profile Settings</h1>
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Manage your account preferences</p>
       </div>
 
       {/* Avatar */}
-      <div className="flex items-center gap-4 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-6">
-        <div className="w-16 h-16 rounded-2xl bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center">
-          <span className="text-indigo-600 dark:text-indigo-400 font-bold text-2xl">
-            {user?.name?.charAt(0).toUpperCase()}
-          </span>
+      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-6 flex items-center gap-5">
+        <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg flex-shrink-0">
+          <span className="text-white font-black text-3xl">{user?.name?.charAt(0).toUpperCase()}</span>
         </div>
         <div>
-          <p className="font-semibold text-gray-900 dark:text-white">{user?.name}</p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">{user?.email}</p>
-          <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">Member since {new Date(user?.createdAt).getFullYear()}</p>
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white">{user?.name}</h2>
+          <p className="text-gray-500 dark:text-gray-400 text-sm">{user?.email}</p>
+          <p className="text-xs text-indigo-500 mt-1">Member since {new Date(user?.createdAt || Date.now()).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })}</p>
         </div>
       </div>
 
-      {/* Profile Form */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-6">
-        <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-4">Account Details</h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <div>
-            <label className={labelClass}>Full Name</label>
-            <div className="relative">
-              <FiUser className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
-              <input
-                {...register('name', { required: 'Name is required', maxLength: { value: 50, message: 'Max 50 chars' } })}
-                className={`${inputClass} pl-10`}
-              />
-            </div>
-            {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>}
-          </div>
+      {/* Edit form */}
+      <form onSubmit={handleSubmit(onSubmit)} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-6 space-y-5">
+        <h3 className="font-semibold text-gray-900 dark:text-white mb-4">Personal Information</h3>
 
-          <div>
-            <label className={labelClass}>Email</label>
-            <input
-              value={user?.email}
-              disabled
-              className={`${inputClass} opacity-60 cursor-not-allowed`}
-            />
-            <p className="mt-1 text-xs text-gray-400">Email cannot be changed.</p>
-          </div>
+        <div>
+          <label className={lbl}><FiUser className="inline w-4 h-4 mr-1" /> Full Name</label>
+          <input {...register('name', { required: 'Name is required' })} className={inp} placeholder="Your name" />
+          {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>}
+        </div>
 
-          <div>
-            <label className={labelClass}>Currency</label>
-            <select {...register('currency')} className={inputClass}>
-              {CURRENCIES.map((c) => (
-                <option key={c} value={c}>{c}</option>
-              ))}
-            </select>
-          </div>
+        <div>
+          <label className={lbl}><FiMail className="inline w-4 h-4 mr-1" /> Email</label>
+          <input value={user?.email || ''} disabled className={`${inp} opacity-50 cursor-not-allowed`} />
+          <p className="mt-1 text-xs text-gray-400">Email cannot be changed</p>
+        </div>
 
-          <div className="flex justify-end pt-2">
-            <button
-              type="submit"
-              disabled={isSubmitting || !isDirty}
-              className="px-4 py-2.5 text-sm font-medium text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 disabled:opacity-50 transition"
-            >
-              {isSubmitting ? 'Saving...' : 'Save Changes'}
-            </button>
-          </div>
-        </form>
-      </div>
+        {/* Currency */}
+        <div>
+          <label className={lbl}><FiGlobe className="inline w-4 h-4 mr-1" /> Default Currency</label>
+          <select
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+            className={inp}
+          >
+            {CURRENCIES.map((c) => (
+              <option key={c.code} value={c.code}>{c.symbol} {c.name} ({c.code})</option>
+            ))}
+          </select>
+          <p className="mt-1 text-xs text-gray-400">This affects how amounts are displayed across the app</p>
+        </div>
 
-      {/* Theme Selector */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-6">
-        <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-4">Appearance</h2>
-        <div className="grid grid-cols-3 gap-3">
-          {THEMES.map(({ value, label, icon: Icon }) => (
-            <button
-              key={value}
-              onClick={() => { setTheme(value); localStorage.setItem('theme', value); }}
-              className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition ${
-                theme === value
-                  ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/30'
-                  : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
-              }`}
-            >
-              <Icon className={`w-5 h-5 ${theme === value ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-500 dark:text-gray-400'}`} />
-              <span className={`text-sm font-medium ${theme === value ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-600 dark:text-gray-400'}`}>
+        {/* Theme */}
+        <div>
+          <label className={lbl}>Theme</label>
+          <div className="grid grid-cols-3 gap-2">
+            {[
+              { value: 'light', label: '☀️ Light' },
+              { value: 'dark',  label: '🌙 Dark'  },
+              { value: 'system',label: '💻 System' },
+            ].map(({ value, label }) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => setTheme(value)}
+                className={`py-2.5 rounded-xl text-sm font-medium border transition ${
+                  theme === value
+                    ? 'bg-indigo-600 text-white border-indigo-600'
+                    : 'bg-gray-50 dark:bg-gray-900 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-indigo-300'
+                }`}
+              >
                 {label}
-              </span>
-            </button>
-          ))}
+              </button>
+            ))}
+          </div>
         </div>
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="flex items-center gap-2 w-full justify-center py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl transition disabled:opacity-50"
+        >
+          <FiSave className="w-4 h-4" />
+          {isSubmitting ? 'Saving...' : 'Save Changes'}
+        </button>
+      </form>
+
+      {/* Danger zone */}
+      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-red-100 dark:border-red-900/40 p-6">
+        <h3 className="font-semibold text-red-600 dark:text-red-400 mb-2">Danger Zone</h3>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+          Once you delete your account, all your data will be permanently removed.
+        </p>
+        <button
+          onClick={() => toast.error('Account deletion not implemented in this demo')}
+          className="px-4 py-2 border border-red-300 dark:border-red-800 text-red-600 dark:text-red-400 rounded-xl text-sm font-medium hover:bg-red-50 dark:hover:bg-red-900/20 transition"
+        >
+          Delete Account
+        </button>
       </div>
     </div>
   );

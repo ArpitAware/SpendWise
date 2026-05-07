@@ -1,76 +1,45 @@
 /**
  * components/expenses/FilterBar.jsx
- * Search input + category/date/payment filters
+ * Search, category filter, date range, sort controls
  */
 
 import { FiSearch, FiX } from 'react-icons/fi';
 
 const CATEGORIES = [
-  'Food & Dining', 'Transportation', 'Shopping', 'Entertainment',
-  'Bills & Utilities', 'Healthcare', 'Education', 'Travel',
-  'Personal Care', 'Other',
+  'Food & Dining','Transportation','Shopping','Entertainment',
+  'Bills & Utilities','Healthcare','Education','Travel','Personal Care','Other',
 ];
 
-const selectClass =
-  'px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500';
-
 export default function FilterBar({ filters, onChange }) {
+  const inp = 'w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500';
+
   const hasActiveFilters =
     filters.search || filters.category || filters.startDate || filters.endDate || filters.paymentMethod;
 
-  const clearAll = () =>
-    onChange({ search: '', category: '', startDate: '', endDate: '', paymentMethod: '' });
-
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-4">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-4 space-y-3">
       <div className="flex flex-col sm:flex-row gap-3">
         {/* Search */}
         <div className="relative flex-1">
           <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
           <input
             type="text"
+            placeholder="Search expenses..."
             value={filters.search}
             onChange={(e) => onChange({ search: e.target.value })}
-            placeholder="Search by title, notes..."
-            className="w-full pl-9 pr-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className={`${inp} pl-9`}
           />
-          {filters.search && (
-            <button
-              onClick={() => onChange({ search: '' })}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-            >
-              <FiX className="w-4 h-4" />
-            </button>
-          )}
         </div>
 
         {/* Category */}
         <select
           value={filters.category}
           onChange={(e) => onChange({ category: e.target.value })}
-          className={selectClass}
+          className={`${inp} sm:w-44`}
         >
           <option value="">All Categories</option>
-          {CATEGORIES.map((c) => (
-            <option key={c} value={c}>{c}</option>
-          ))}
+          {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
         </select>
-
-        {/* Date Range */}
-        <input
-          type="date"
-          value={filters.startDate}
-          onChange={(e) => onChange({ startDate: e.target.value })}
-          className={selectClass}
-          title="Start date"
-        />
-        <input
-          type="date"
-          value={filters.endDate}
-          onChange={(e) => onChange({ endDate: e.target.value })}
-          className={selectClass}
-          title="End date"
-        />
 
         {/* Sort */}
         <select
@@ -79,22 +48,55 @@ export default function FilterBar({ filters, onChange }) {
             const [sortBy, order] = e.target.value.split('-');
             onChange({ sortBy, order });
           }}
-          className={selectClass}
+          className={`${inp} sm:w-44`}
         >
-          <option value="date-desc">Newest first</option>
-          <option value="date-asc">Oldest first</option>
-          <option value="amount-desc">Highest amount</option>
-          <option value="amount-asc">Lowest amount</option>
+          <option value="date-desc">Date: Newest</option>
+          <option value="date-asc">Date: Oldest</option>
+          <option value="amount-desc">Amount: High to Low</option>
+          <option value="amount-asc">Amount: Low to High</option>
+        </select>
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-3">
+        {/* Date range */}
+        <div className="flex items-center gap-2 flex-1">
+          <label className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">From</label>
+          <input
+            type="date"
+            value={filters.startDate}
+            onChange={(e) => onChange({ startDate: e.target.value })}
+            className={inp}
+          />
+          <label className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">To</label>
+          <input
+            type="date"
+            value={filters.endDate}
+            onChange={(e) => onChange({ endDate: e.target.value })}
+            className={inp}
+          />
+        </div>
+
+        {/* Payment method */}
+        <select
+          value={filters.paymentMethod}
+          onChange={(e) => onChange({ paymentMethod: e.target.value })}
+          className={`${inp} sm:w-44`}
+        >
+          <option value="">All Methods</option>
+          <option value="cash">Cash</option>
+          <option value="credit_card">Credit Card</option>
+          <option value="debit_card">Debit Card</option>
+          <option value="bank_transfer">Bank Transfer / UPI</option>
+          <option value="other">Other</option>
         </select>
 
         {/* Clear filters */}
         {hasActiveFilters && (
           <button
-            onClick={clearAll}
-            className="flex items-center gap-1.5 px-3 py-2 text-sm text-red-500 hover:text-red-700 bg-red-50 dark:bg-red-900/20 rounded-xl transition whitespace-nowrap"
+            onClick={() => onChange({ search: '', category: '', startDate: '', endDate: '', paymentMethod: '' })}
+            className="flex items-center gap-1.5 px-3 py-2 text-sm text-gray-500 dark:text-gray-400 hover:text-red-500 border border-gray-200 dark:border-gray-700 rounded-xl transition whitespace-nowrap"
           >
-            <FiX className="w-4 h-4" />
-            Clear
+            <FiX className="w-4 h-4" /> Clear
           </button>
         )}
       </div>

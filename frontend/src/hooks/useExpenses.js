@@ -32,12 +32,10 @@ export const useExpenses = () => {
   const createExpense = useCallback(async (formData) => {
     try {
       const { data } = await expenseAPI.create(formData);
-      setExpenses((prev) => [data.data, ...prev]);
       toast.success('Expense added!');
       return data.data;
     } catch (err) {
-      const msg = err.response?.data?.message || 'Failed to add expense';
-      toast.error(msg);
+      toast.error(err.response?.data?.message || 'Failed to add expense');
       throw err;
     }
   }, []);
@@ -45,12 +43,10 @@ export const useExpenses = () => {
   const updateExpense = useCallback(async (id, formData) => {
     try {
       const { data } = await expenseAPI.update(id, formData);
-      setExpenses((prev) => prev.map((e) => (e._id === id ? data.data : e)));
       toast.success('Expense updated!');
       return data.data;
     } catch (err) {
-      const msg = err.response?.data?.message || 'Failed to update expense';
-      toast.error(msg);
+      toast.error(err.response?.data?.message || 'Failed to update expense');
       throw err;
     }
   }, []);
@@ -60,9 +56,8 @@ export const useExpenses = () => {
       await expenseAPI.delete(id);
       setExpenses((prev) => prev.filter((e) => e._id !== id));
       toast.success('Expense deleted');
-    } catch (err) {
+    } catch {
       toast.error('Failed to delete expense');
-      throw err;
     }
   }, []);
 
@@ -75,15 +70,5 @@ export const useExpenses = () => {
     }
   }, []);
 
-  return {
-    expenses,
-    pagination,
-    loading,
-    error,
-    fetchExpenses,
-    createExpense,
-    updateExpense,
-    deleteExpense,
-    exportCSV,
-  };
+  return { expenses, pagination, loading, error, fetchExpenses, createExpense, updateExpense, deleteExpense, exportCSV };
 };

@@ -20,37 +20,37 @@ function useScrollReveal() {
 const FEATURE_GROUPS = [
   {
     icon: FiPieChart, gradient:'from-emerald-500 to-teal-600',
-    bg:'bg-emerald-500/5 border-emerald-500/15',
+    bg:'bg-emerald-50 dark:bg-emerald-500/5 border-emerald-200 dark:border-emerald-500/15',
     title:'Expense Tracking',
     features:['Add, edit & delete expenses','Full-text search','Date & category filters','Payment method tracking','Notes & tags','Pagination support'],
   },
   {
     icon: FiZap, gradient:'from-indigo-500 to-blue-600',
-    bg:'bg-indigo-500/5 border-indigo-500/15',
+    bg:'bg-indigo-50 dark:bg-indigo-500/5 border-indigo-200 dark:border-indigo-500/15',
     title:'Dashboard & Analytics',
     features:['Monthly area chart','Category pie chart','Top categories bar chart','YTD totals & averages','Real-time aggregation','Refresh on demand'],
   },
   {
     icon: FiShield, gradient:'from-purple-500 to-violet-600',
-    bg:'bg-purple-500/5 border-purple-500/15',
+    bg:'bg-purple-50 dark:bg-purple-500/5 border-purple-200 dark:border-purple-500/15',
     title:'Budgeting',
     features:['Monthly budget limits','Per-category budgets','Animated progress bars','Threshold alerts (0–100%)','Spending vs limit live','Budget reset each month'],
   },
   {
     icon: FiUsers, gradient:'from-rose-500 to-pink-600',
-    bg:'bg-rose-500/5 border-rose-500/15',
+    bg:'bg-rose-50 dark:bg-rose-500/5 border-rose-200 dark:border-rose-500/15',
     title:'Account & Security',
     features:['JWT + refresh rotation','Bcrypt passwords (cost 12)','Profile customization','8 currency support','Dark/light/system theme','Rate limiting + Helmet'],
   },
   {
     icon: FiDownload, gradient:'from-amber-500 to-orange-600',
-    bg:'bg-amber-500/5 border-amber-500/15',
+    bg:'bg-amber-50 dark:bg-amber-500/5 border-amber-200 dark:border-amber-500/15',
     title:'Data & Export',
     features:['One-click CSV export','Full expense history','Sort by any field','No data limits','Date-range export','All fields included'],
   },
   {
     icon: FiStar, gradient:'from-cyan-500 to-sky-600',
-    bg:'bg-cyan-500/5 border-cyan-500/15',
+    bg:'bg-cyan-50 dark:bg-cyan-500/5 border-cyan-200 dark:border-cyan-500/15',
     title:'Developer Quality',
     features:['MVC architecture','express-validator inputs','Compound MongoDB indexes','Axios refresh interceptor','Lazy-loaded pages','Winston structured logs'],
   },
@@ -73,11 +73,11 @@ export default function PricingPage() {
   useScrollReveal();
 
   return (
-    <div className="min-h-screen bg-gray-950">
+    <div className="min-h-screen bg-white dark:bg-gray-950 transition-colors duration-300">
       <PublicNavbar />
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="pt-32 pb-16 px-4 text-center relative overflow-hidden">
+      <section className="pt-24 pb-16 px-4 text-center relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute inset-0" style={{ background:'radial-gradient(ellipse 60% 40% at 50% 0%, rgba(99,102,241,0.15) 0%, transparent 70%)' }} />
           <div className="animate-blob absolute top-20 left-1/4 w-72 h-72 bg-indigo-600/8 rounded-full blur-3xl" />
@@ -88,12 +88,12 @@ export default function PricingPage() {
             <span className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" />
             One Plan. Everything Included.
           </div>
-          <h1 className="animate-slide-up delay-100 text-5xl md:text-6xl font-black text-white mb-4 leading-tight">
+          <h1 className="animate-slide-up delay-100 text-5xl md:text-6xl font-black text-gray-900 dark:text-white mb-4 leading-tight">
             Simple,{' '}
             <span className="shimmer-text">honest</span>{' '}
             pricing.
           </h1>
-          <p className="animate-slide-up delay-200 text-xl text-gray-500 max-w-2xl mx-auto">
+          <p className="animate-slide-up delay-200 text-xl text-gray-600 dark:text-gray-500 max-w-2xl mx-auto">
             No tiers, no feature gates, no surprises. SpendWise gives you everything from day one — completely free.
           </p>
         </div>
@@ -104,13 +104,13 @@ export default function PricingPage() {
         <div className="max-w-md mx-auto reveal">
           {/* Billing toggle */}
           <div className="flex justify-center mb-8">
-            <div className="inline-flex bg-gray-900 border border-white/8 rounded-2xl p-1 gap-1">
+            <div className="inline-flex bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-white/8 rounded-2xl p-1 gap-1">
               {['monthly','yearly'].map((b) => (
                 <button key={b} onClick={() => setBilling(b)}
                   className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all capitalize ${
                     billing === b
                       ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30'
-                      : 'text-gray-500 hover:text-gray-300'
+                      : 'text-gray-500 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
                   }`}>
                   {b}
                   {b === 'yearly' && <span className="ml-1.5 text-xs bg-emerald-500 text-white px-1.5 py-0.5 rounded-full">Save 33%</span>}
@@ -120,7 +120,7 @@ export default function PricingPage() {
           </div>
 
           {/* Card */}
-          <div className="relative rounded-3xl overflow-hidden border border-indigo-500/30 shadow-2xl shadow-indigo-500/10">
+          <div className="relative rounded-3xl overflow-hidden border border-indigo-400/40 dark:border-indigo-500/30 shadow-2xl shadow-indigo-500/10 bg-white dark:bg-transparent">
             {/* Gradient border glow */}
             <div className="absolute inset-0 rounded-3xl" style={{ background:'linear-gradient(135deg,rgba(99,102,241,0.15),rgba(168,85,247,0.05),rgba(99,102,241,0.1))', pointerEvents:'none' }} />
 
@@ -189,8 +189,8 @@ export default function PricingPage() {
       <section className="py-20 px-4 sm:px-6" style={{ background:'linear-gradient(180deg,rgba(99,102,241,0.04) 0%,transparent 100%)' }}>
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 reveal">
-            <h2 className="text-4xl font-black text-white mb-3">Everything You Get</h2>
-            <p className="text-gray-500">One plan. No feature tiers. No hidden costs.</p>
+            <h2 className="text-4xl font-black text-gray-900 dark:text-white mb-3">Everything You Get</h2>
+            <p className="text-gray-600 dark:text-gray-500">One plan. No feature tiers. No hidden costs.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {FEATURE_GROUPS.map((g, i) => (
@@ -218,7 +218,7 @@ export default function PricingPage() {
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
       <section className="py-20 px-4 sm:px-6 max-w-3xl mx-auto">
         <div className="text-center mb-12 reveal">
-          <h2 className="text-4xl font-black text-white">Frequently asked</h2>
+          <h2 className="text-4xl font-black text-gray-900 dark:text-white">Frequently asked</h2>
         </div>
         <div className="space-y-3 reveal">
           {[
@@ -228,8 +228,8 @@ export default function PricingPage() {
             { q:'Why is the dashboard chart empty?', a:'The chart uses MongoDB aggregation with proper ObjectId casting — it updates in real time as you add expenses. Try adding a few expenses first.' },
             { q:'What tech stack is it built on?', a:'MongoDB + Express.js + React 18 + Node.js (MERN). Recharts for charts, Tailwind CSS, Axios with interceptors, JWT auth, and Vite as the build tool.' },
           ].map(({ q, a }) => (
-            <details key={q} className="group bg-gray-900 border border-white/5 rounded-2xl p-5 hover:border-indigo-500/20 transition-all">
-              <summary className="font-semibold text-white cursor-pointer flex items-center justify-between list-none">
+            <details key={q} className="group bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-white/5 rounded-2xl p-5 hover:border-indigo-300 dark:hover:border-indigo-500/20 transition-all">
+              <summary className="font-semibold text-gray-900 dark:text-white cursor-pointer flex items-center justify-between list-none">
                 {q}
                 <span className="text-indigo-400 group-open:rotate-45 transition-transform text-2xl leading-none ml-4 flex-shrink-0">+</span>
               </summary>
@@ -259,8 +259,8 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <footer className="border-t border-white/5 py-8 px-4 text-center text-sm text-gray-700">
-        <p>© 2025 SpendWise — MIT License. Made with ❤️ in India 🇮🇳</p>
+      <footer className="border-t border-gray-200 dark:border-white/5 py-8 px-4 text-center text-sm text-gray-500 dark:text-gray-700">
+        <p>© 2065 SpendWise — MIT License. Made with ❤️ in India 🇮🇳</p>
       </footer>
     </div>
   );

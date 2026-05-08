@@ -1,15 +1,14 @@
 /**
- * components/home/PublicNavbar.jsx - FIXED: Go to App → Dashboard + Profile links
+ * components/home/PublicNavbar.jsx
+ * Theme toggle REMOVED from public pages — dark design is fixed aesthetic
  */
 import { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { useTheme } from '../../context/ThemeContext';
-import { FiSun, FiMoon, FiMenu, FiX, FiGrid, FiUser, FiLogOut, FiChevronDown } from 'react-icons/fi';
+import { FiMenu, FiX, FiGrid, FiUser, FiLogOut, FiChevronDown } from 'react-icons/fi';
 
 export default function PublicNavbar() {
   const { user, logout } = useAuth();
-  const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [appDropOpen, setAppDropOpen] = useState(false);
@@ -40,7 +39,9 @@ export default function PublicNavbar() {
         : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-14">
+
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
               <span className="text-white font-black text-lg">₹</span>
@@ -65,13 +66,10 @@ export default function PublicNavbar() {
             ))}
           </div>
 
+          {/* Right side — NO theme toggle here */}
           <div className="hidden md:flex items-center gap-2">
-            <button onClick={toggleTheme} className="p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/10 transition">
-              {theme === 'dark' ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
-            </button>
-
             {user ? (
-              /* ── Logged-in: show dropdown with Dashboard + Profile ── */
+              /* Logged-in: dropdown with Dashboard + Profile */
               <div className="relative" ref={dropRef}>
                 <button
                   onClick={() => setAppDropOpen(!appDropOpen)}

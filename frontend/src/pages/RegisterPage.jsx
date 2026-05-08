@@ -65,7 +65,7 @@ export default function RegisterPage() {
             ))}
           </ul>
         </div>
-        <p className="text-gray-600 text-sm relative z-10">© 2025 SpendWise • MIT License</p>
+        <p className="text-gray-600 text-sm relative z-10">© 2026 SpendWise • MIT License</p>
       </div>
 
       {/* Right: Form */}

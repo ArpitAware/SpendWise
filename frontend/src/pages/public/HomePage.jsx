@@ -138,8 +138,8 @@ function LiveDashboard({ stats, formatAmount }) {
       </div>
       {totalCount > 0 ? (
         <>
-          <div className="bg-gray-800/60 rounded-2xl p-4">
-            <p className="text-xs text-gray-400 font-medium mb-3">Monthly Spending {new Date().getFullYear()}</p>
+          <div className="bg-gray-100 dark:bg-gray-800/60 rounded-2xl p-4">
+            <p className="text-xs text-gray-600 dark:text-gray-400 font-medium mb-3">Monthly Spending {new Date().getFullYear()}</p>
             <ResponsiveContainer width="100%" height={120}>
               <AreaChart data={monthlyData}>
                 <defs>
@@ -155,18 +155,18 @@ function LiveDashboard({ stats, formatAmount }) {
             </ResponsiveContainer>
           </div>
           {byCategory.length > 0 && (
-            <div className="bg-gray-800/60 rounded-2xl p-4">
-              <p className="text-xs text-gray-400 font-medium mb-3">By Category</p>
+            <div className="bg-gray-100 dark:bg-gray-800/60 rounded-2xl p-4">
+              <p className="text-xs text-gray-600 dark:text-gray-400 font-medium mb-3">By Category</p>
               <div className="space-y-2">
                 {byCategory.slice(0,4).map((c,i) => (
                   <div key={c.category} className="flex items-center gap-3">
                     <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{background:COLORS[i]}} />
                     <div className="flex-1 min-w-0">
                       <div className="flex justify-between text-xs mb-1">
-                        <span className="text-gray-300 truncate">{c.category}</span>
-                        <span className="text-white font-semibold ml-2">{formatAmount(c.total)}</span>
+                        <span className="text-gray-700 dark:text-gray-300 truncate">{c.category}</span>
+                        <span className="text-gray-900 dark:text-white font-semibold ml-2">{formatAmount(c.total)}</span>
                       </div>
-                      <div className="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                      <div className="h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                         <div className="h-full rounded-full" style={{ width:`${Math.min(100,(c.total/byCategory[0].total)*100)}%`, background:COLORS[i] }} />
                       </div>
                     </div>
@@ -182,10 +182,10 @@ function LiveDashboard({ stats, formatAmount }) {
           </Link>
         </>
       ) : (
-        <div className="bg-gray-800/60 rounded-2xl p-6 text-center">
+        <div className="bg-gray-100 dark:bg-gray-800/60 rounded-2xl p-6 text-center">
           <span className="text-3xl block mb-2">💸</span>
-          <p className="text-gray-300 text-sm font-medium">No expenses yet</p>
-          <p className="text-gray-500 text-xs mt-1">Add your first expense to see live charts here</p>
+          <p className="text-gray-700 dark:text-gray-300 text-sm font-medium">No expenses yet</p>
+          <p className="text-gray-500 dark:text-gray-500 text-xs mt-1">Add your first expense to see live charts here</p>
           <Link to="/expenses" className="inline-block mt-4 px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm font-semibold hover:bg-indigo-500 transition">
             Add Expense →
           </Link>
@@ -207,51 +207,35 @@ function DemoPreview() {
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
         {[
-          { label:'Total Spent',  val:'₹84,320', color:'from-indigo-600 to-indigo-800', emoji:'💸' },
-          { label:'This Month',   val:'₹12,450', color:'from-purple-600 to-purple-800', emoji:'📅' },
-          { label:'# Expenses',   val:'247',     color:'from-rose-500 to-rose-700',     emoji:'📋' },
-          { label:'Avg Expense',  val:'₹341',    color:'from-amber-500 to-orange-600',  emoji:'📊' },
+          { label:'Total Spent', val:'₹84,320', color:'from-indigo-600 to-indigo-800', emoji:'💸' },
+          { label:'This Month',  val:'₹12,450', color:'from-purple-600 to-purple-800', emoji:'📅' },
         ].map((c,i) => (
-          <div key={c.label} className={`p-4 rounded-2xl bg-gradient-to-br ${c.color} shadow-lg animate-float delay-${(i+1)*100}`}>
-            <div className="text-xl mb-0.5">{c.emoji}</div>
-            <div className="text-lg font-black text-white">{c.val}</div>
-            <div className="text-white/60 text-xs">{c.label}</div>
+          <div key={c.label} className={`p-5 rounded-2xl bg-gradient-to-br ${c.color} shadow-lg animate-float delay-${(i+1)*100}`}>
+            <div className="text-2xl mb-1">{c.emoji}</div>
+            <div className="text-xl font-black text-white">{c.val}</div>
+            <div className="text-white/60 text-xs mt-0.5">{c.label}</div>
           </div>
         ))}
       </div>
 
       {/* Animated bar chart */}
-      <div className="bg-gray-800/60 backdrop-blur rounded-2xl p-4">
+      <div className="bg-gray-100 dark:bg-gray-800/60 dark:backdrop-blur rounded-2xl p-4">
         <div className="flex justify-between text-xs text-gray-400 mb-3">
-          <span className="font-medium">Monthly Spending — 2025</span>
+          <span className="font-medium">Monthly Spending — {new Date().getFullYear()}</span>
           <span className="text-indigo-400">This Year</span>
         </div>
         <div className="flex items-end gap-1.5 h-20">
           {DEMO_MONTHS.map((m,i) => (
             <div key={m.name} className="flex-1 flex flex-col items-center gap-1">
               <div className={`w-full rounded-t-md transition-all duration-500 ${
-                i === active ? 'bg-indigo-500 shadow-lg shadow-indigo-500/40' : 'bg-gray-700'
+                i === active ? 'bg-indigo-500 shadow-lg shadow-indigo-500/40' : 'bg-gray-300 dark:bg-gray-700'
               }`} style={{ height:`${(m.total/28700)*100}%`, minHeight:4 }} />
             </div>
           ))}
         </div>
         <div className="flex mt-2">
           {DEMO_MONTHS.map((m,i) => (
-            <span key={m.name} className={`flex-1 text-center text-[10px] transition-colors ${i === active ? 'text-indigo-400 font-bold' : 'text-gray-600'}`}>{m.name}</span>
-          ))}
-        </div>
-      </div>
-
-      {/* Category mini breakdown */}
-      <div className="bg-gray-800/60 backdrop-blur rounded-2xl p-4">
-        <p className="text-xs text-gray-400 font-medium mb-3">Top Categories</p>
-        <div className="space-y-2">
-          {DEMO_CATS.map((c,i) => (
-            <div key={c.category} className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full" style={{background:COLORS[i]}} />
-              <span className="text-xs text-gray-300 flex-1">{c.category}</span>
-              <span className="text-xs font-semibold text-white">₹{(c.total/1000).toFixed(1)}K</span>
-            </div>
+            <span key={m.name} className={`flex-1 text-center text-[10px] transition-colors ${i === active ? 'text-indigo-600 dark:text-indigo-400 font-bold' : 'text-gray-400 dark:text-gray-600'}`}>{m.name}</span>
           ))}
         </div>
       </div>
@@ -285,18 +269,18 @@ export default function HomePage() {
       <PublicNavbar />
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center overflow-hidden pt-16">
+      <section className="relative min-h-screen flex items-center overflow-hidden pt-14">
         {/* Background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute inset-0" style={{ background:'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99,102,241,0.25) 0%, transparent 70%)' }} />
-          <div className="animate-blob absolute top-40 left-20 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl" />
-          <div className="animate-blob delay-3000 absolute top-60 right-20 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl" />
-          <div className="animate-blob delay-2000 absolute bottom-20 left-1/2 w-72 h-72 bg-pink-600/8 rounded-full blur-3xl" />
+          <div className="absolute inset-0" style={{ background:'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99,102,241,0.15) 0%, transparent 70%)' }} />
+          <div className="animate-blob absolute top-40 left-20 w-96 h-96 bg-indigo-400/15 dark:bg-indigo-600/10 rounded-full blur-3xl" />
+          <div className="animate-blob delay-3000 absolute top-60 right-20 w-80 h-80 bg-purple-400/15 dark:bg-purple-600/10 rounded-full blur-3xl" />
+          <div className="animate-blob delay-2000 absolute bottom-20 left-1/2 w-72 h-72 bg-pink-400/10 dark:bg-pink-600/8 rounded-full blur-3xl" />
           {/* Grid */}
           <div className="absolute inset-0 opacity-[0.04]"
             style={{ backgroundImage:'linear-gradient(rgba(99,102,241,1) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,1) 1px,transparent 1px)', backgroundSize:'60px 60px' }} />
           {/* Radial vignette */}
-          <div className="absolute inset-0" style={{ background:'radial-gradient(ellipse at center,transparent 40%,#030712 100%)' }} />
+          <div className="absolute inset-0" style={{ background:'radial-gradient(ellipse at center,transparent 40%,var(--bg-vignette,#030712) 100%)' }} className="dark:[--bg-vignette:#030712] [--bg-vignette:#f9fafb]" />
         </div>
 
         {/* 3D floating icons */}
@@ -310,29 +294,30 @@ export default function HomePage() {
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-xl shadow-2xl" style={{ transform:'perspective(400px) rotateY(20deg) rotateX(12deg)' }}>🎯</div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left: Text */}
           <div>
-            <div className="animate-slide-up">
+            {/* Badge — sits above hero headline, not overlapping */}
+            <div className="mb-6 animate-fade-in">
               {user ? (
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 text-sm font-medium mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 text-sm font-medium">
                   <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
                   Welcome back, {user.name?.split(' ')[0]}! 👋
                 </div>
               ) : (
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full text-indigo-400 text-sm font-medium mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full text-indigo-400 text-sm font-medium">
                   <span className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" />
                   Free & Open Source — MERN Stack
                 </div>
               )}
             </div>
 
-            <h1 className="animate-slide-up delay-100 text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[1.05] mb-6">
+            <h1 className="animate-slide-up delay-100 text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white leading-[1.05] mb-6">
               Track money.<br />
               <span className="shimmer-text">Live smarter.</span>
             </h1>
 
-            <p className="animate-slide-up delay-200 text-lg text-gray-400 max-w-xl mb-10 leading-relaxed">
+            <p className="animate-slide-up delay-200 text-lg text-gray-600 dark:text-gray-400 max-w-xl mb-10 leading-relaxed">
               {user
                 ? `Your financial dashboard is ready. ${stats?.totals?.totalExpenses || 0} expenses tracked, ${stats?.byCategory?.length || 0} categories active.`
                 : 'A beautiful expense tracker with live charts, budget alerts, INR support, and CSV export — built on the MERN stack. 100% free.'
@@ -395,7 +380,7 @@ export default function HomePage() {
                     <div className="w-3 h-3 rounded-full bg-emerald-500/70" />
                   </div>
                   <div className="flex-1 mx-3 h-6 bg-white/5 rounded-lg flex items-center px-3">
-                    <span className="text-gray-600 text-xs">spendwise.app/dashboard</span>
+                    <span className="text-gray-500 dark:text-gray-600 text-xs">spendwise.app/dashboard</span>
                   </div>
                 </div>
 
@@ -413,13 +398,13 @@ export default function HomePage() {
                     <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center">
                       <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                     </div>
-                    <span className="text-emerald-400 text-xs font-semibold">Budget on track</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 text-xs font-semibold">Budget on track</span>
                   </div>
                 </div>
               </div>
               <div className="absolute -bottom-4 -left-4 animate-float-slow delay-400">
                 <div className="glass-dark rounded-xl p-3 shadow-xl border border-indigo-500/20">
-                  <div className="text-indigo-400 text-xs font-semibold">+₹2,400 saved this month 🎉</div>
+                  <div className="text-indigo-600 dark:text-indigo-400 text-xs font-semibold">+₹2,400 saved this month 🎉</div>
                 </div>
               </div>
             </div>
@@ -428,10 +413,10 @@ export default function HomePage() {
       </section>
 
       {/* ── TICKER ──────────────────────────────────────────────────────── */}
-      <div className="relative py-4 border-y border-white/5 overflow-hidden" style={{background:'linear-gradient(90deg,rgba(99,102,241,0.08),rgba(168,85,247,0.08),rgba(99,102,241,0.08))'}}>
+      <div className="relative py-4 overflow-hidden border-y border-gray-100 dark:border-white/5 bg-indigo-50 dark:bg-indigo-950/40">
         <div className="flex animate-ticker whitespace-nowrap">
           {[...TICKER,...TICKER].map((item,i) => (
-            <span key={i} className="inline-flex items-center text-gray-400 text-sm font-medium px-8">
+            <span key={i} className="inline-flex items-center text-indigo-600 dark:text-gray-400 text-sm font-medium px-8">
               {item} <span className="ml-8 text-indigo-600">✦</span>
             </span>
           ))}
@@ -441,37 +426,37 @@ export default function HomePage() {
       {/* ── FEATURES ────────────────────────────────────────────────────── */}
       <section className="py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center mb-16 reveal">
-          <span className="text-indigo-400 text-sm font-bold uppercase tracking-widest">Everything You Need</span>
-          <h2 className="text-4xl md:text-5xl font-black text-white mt-3 mb-4">
+          <span className="text-indigo-600 dark:text-indigo-400 text-sm font-bold uppercase tracking-widest">Everything You Need</span>
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mt-3 mb-4">
             Built for real financial clarity
           </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto text-lg">
+          <p className="text-gray-500 dark:text-gray-500 max-w-2xl mx-auto text-lg">
             One plan. No feature tiers. No hidden costs. Every feature from day one.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {FEATURES.map((f, i) => (
-            <div key={f.title} className={`reveal delay-${(i%3+1)*100} group relative p-6 bg-gray-900 rounded-2xl border border-white/5 hover:border-indigo-500/30 transition-all duration-300 card-hover overflow-hidden`}>
+            <div key={f.title} className={`reveal delay-${(i%3+1)*100} group relative p-6 bg-gray-100 dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-white/5 hover:border-indigo-400 dark:hover:border-indigo-500/30 transition-all duration-300 card-hover overflow-hidden`}>
               {/* Hover glow */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ background:'radial-gradient(circle at 50% 0%, rgba(99,102,241,0.08), transparent 70%)' }} />
+                style={{ background:'radial-gradient(circle at 50% 0%, rgba(99,102,241,0.12), transparent 70%)' }} />
               <div className={`relative w-12 h-12 rounded-2xl bg-gradient-to-br ${f.color} flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 transition-transform`}>
                 <f.icon className="w-6 h-6 text-white" />
               </div>
-              <h3 className="relative font-bold text-white text-lg mb-2">{f.title}</h3>
-              <p className="relative text-gray-500 text-sm leading-relaxed">{f.desc}</p>
+              <h3 className="relative font-bold text-gray-900 dark:text-white text-lg mb-2">{f.title}</h3>
+              <p className="relative text-gray-500 dark:text-gray-500 text-sm leading-relaxed">{f.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* ── HOW IT WORKS ────────────────────────────────────────────────── */}
-      <section className="py-24 px-4 border-y border-white/5" style={{ background:'linear-gradient(180deg,rgba(99,102,241,0.03) 0%,transparent 100%)' }}>
+      <section className="py-24 px-4 border-y border-white/5" className='bg-gray-50 dark:bg-gray-900/30'>
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16 reveal">
-            <span className="text-indigo-400 text-sm font-bold uppercase tracking-widest">How It Works</span>
-            <h2 className="text-4xl font-black text-white mt-3">Up and running in 3 steps</h2>
+            <span className="text-indigo-600 dark:text-indigo-400 text-sm font-bold uppercase tracking-widest">How It Works</span>
+            <h2 className="text-4xl font-black text-gray-900 dark:text-white mt-3">Up and running in 3 steps</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
             {/* Connecting line */}
@@ -485,9 +470,9 @@ export default function HomePage() {
                 <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 text-2xl mb-4 shadow-xl shadow-indigo-500/30 animate-pulse-glow">
                   {s.emoji}
                 </div>
-                <div className="text-5xl font-black text-white/5 mb-2 -mt-2">{s.num}</div>
-                <h3 className="font-bold text-white text-lg mb-2 -mt-8">{s.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
+                <div className="text-5xl font-black text-gray-900/10 dark:text-white/5 mb-2 -mt-2">{s.num}</div>
+                <h3 className="font-bold text-gray-900 dark:text-white text-lg mb-2 -mt-8">{s.title}</h3>
+                <p className="text-gray-500 dark:text-gray-500 text-sm leading-relaxed">{s.desc}</p>
               </div>
             ))}
           </div>
@@ -516,22 +501,22 @@ export default function HomePage() {
       {/* ── TESTIMONIALS ────────────────────────────────────────────────── */}
       <section className="py-24 px-4 max-w-7xl mx-auto">
         <div className="text-center mb-12 reveal">
-          <span className="text-indigo-400 text-sm font-bold uppercase tracking-widest">Loved By Users</span>
+          <span className="text-indigo-600 dark:text-indigo-400 text-sm font-bold uppercase tracking-widest">Loved By Users</span>
           <h2 className="text-4xl font-black text-white mt-3">What people say</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {TESTIMONIALS.map((t,i) => (
-            <div key={t.name} className={`reveal delay-${(i+1)*100} p-6 bg-gray-900 rounded-2xl border border-white/5 hover:border-indigo-500/20 transition-all card-hover`}>
+            <div key={t.name} className={`reveal delay-${(i+1)*100} p-6 bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-white/5 hover:border-indigo-300 dark:hover:border-indigo-500/20 transition-all card-hover`}>
               <div className="flex gap-1 mb-4">
                 {[...Array(t.rating)].map((_,j) => <FiStar key={j} className="w-4 h-4 fill-amber-400 text-amber-400" />)}
               </div>
-              <p className="text-gray-400 text-sm leading-relaxed mb-5">"{t.text}"</p>
+              <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-5">"{t.text}"</p>
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">
                   {t.name.charAt(0)}
                 </div>
                 <div>
-                  <p className="font-semibold text-white text-sm">{t.name}</p>
+                  <p className="font-semibold text-gray-900 dark:text-white text-sm">{t.name}</p>
                   <p className="text-gray-600 text-xs">{t.role}</p>
                 </div>
               </div>
@@ -584,20 +569,20 @@ export default function HomePage() {
       </section>
 
       {/* ── FOOTER ──────────────────────────────────────────────────────── */}
-      <footer className="border-t border-white/5 py-8 px-4">
+      <footer className="border-t border-gray-200 dark:border-white/5 py-8 px-4 bg-white dark:bg-transparent">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <Link to="/" className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
               <span className="text-white font-black text-sm">₹</span>
             </div>
-            <span className="font-black text-white">SpendWise</span>
+            <span className="font-black text-gray-900 dark:text-white">SpendWise</span>
           </Link>
-          <div className="flex gap-6 text-sm text-gray-600">
+          <div className="flex gap-6 text-sm text-gray-500 dark:text-gray-600">
             {[['/', 'Home'], ['/about', 'About'], ['/pricing', 'Pricing'], ['/login', 'Login']].map(([to, label]) => (
               <Link key={to} to={to} className="hover:text-indigo-400 transition">{label}</Link>
             ))}
           </div>
-          <p className="text-gray-700 text-sm">© 2025 SpendWise — MIT License 🇮🇳</p>
+          <p className="text-gray-400 dark:text-gray-700 text-sm">© 2026 SpendWise — MIT License 🇮🇳</p>
         </div>
       </footer>
     </div>

@@ -1,16 +1,27 @@
-# dependencies
-node_modules
+# Dependencies
+node_modules/
+**/node_modules/
 
-# env files
+# Environment files — NEVER commit these
 .env
+**/.env
 .env.local
+.env.production
 
-# build files
-dist
-build
+# Build outputs
+frontend/dist/
+frontend/build/
 
-# logs
+# Logs
+logs/
+*.log
 npm-debug.log*
 
 # OS files
 .DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp

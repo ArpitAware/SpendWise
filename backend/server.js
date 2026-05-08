@@ -1,6 +1,6 @@
 /**
  * server.js — Main entry point for the Expense Tracker API
- * Applies security middleware, connects to MongoDB, mounts all routes
+ * Production-ready with dynamic CORS for Vercel + Render deployment
  */
 
 const express = require('express');
@@ -13,21 +13,34 @@ const mongoSanitize = require('express-mongo-sanitize');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
-const authRoutes = require('./routes/auth.routes');
-const expenseRoutes = require('./routes/expense.routes');
-const budgetRoutes = require('./routes/budget.routes');
+const authRoutes     = require('./routes/auth.routes');
+const expenseRoutes  = require('./routes/expense.routes');
+const budgetRoutes   = require('./routes/budget.routes');
 const { errorHandler, notFound } = require('./middleware/error.middleware');
 const logger = require('./utils/logger');
 
 const app = express();
 
-// ─── Security Middleware ─────────────────────────────────────────────────────
-app.use(helmet());  // Sets secure HTTP headers
+// ─── CORS — allow localhost dev + production Vercel URL ──────────────────────
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  process.env.CLIENT_URL,          // your Vercel URL e.g. https://spendwise.vercel.app
+].filter(Boolean);
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, Postman, curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    callback(new Error(`CORS blocked for origin: ${origin}`));
+  },
   credentials: true,
 }));
-app.use(mongoSanitize()); // Prevents NoSQL injection attacks
+
+// ─── Security Middleware ─────────────────────────────────────────────────────
+app.use(helmet());
+app.use(mongoSanitize());
 
 // ─── Rate Limiting ───────────────────────────────────────────────────────────
 const limiter = rateLimit({
@@ -39,50 +52,52 @@ app.use('/api/', limiter);
 
 // ─── General Middleware ──────────────────────────────────────────────────────
 app.use(compression());
-app.use(express.json({ limit: '10kb' })); // Prevents large payload attacks
+app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true }));
 
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev')); // HTTP request logger in dev mode
+if (process.env.NODE_ENV !== 'production') {
+  app.use(morgan('dev'));
 }
 
 // ─── Routes ──────────────────────────────────────────────────────────────────
-app.use('/api/auth', authRoutes);
+app.use('/api/auth',     authRoutes);
 app.use('/api/expenses', expenseRoutes);
-app.use('/api/budgets', budgetRoutes);
+app.use('/api/budgets',  budgetRoutes);
 
-// Health check endpoint (useful for deployment monitoring)
+// Health check — Render pings this to keep the service awake
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', environment: process.env.NODE_ENV, timestamp: new Date().toISOString() });
+  res.json({
+    status: 'OK',
+    environment: process.env.NODE_ENV,
+    timestamp: new Date().toISOString(),
+  });
 });
 
 // ─── Error Handling ──────────────────────────────────────────────────────────
 app.use(notFound);
 app.use(errorHandler);
 
-// ─── Database Connection & Server Start ─────────────────────────────────────
+// ─── Database + Server Start ─────────────────────────────────────────────────
 const startServer = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    logger.info('✅ MongoDB connected successfully');
+    logger.info('✅ MongoDB connected');
 
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => {
-      logger.info(`🚀 Server running on port ${PORT} in ${process.env.NODE_ENV} mode`);
+      logger.info(`🚀 Server running on port ${PORT} [${process.env.NODE_ENV}]`);
     });
   } catch (err) {
-    logger.error('❌ Database connection failed:', err.message);
+    logger.error('❌ Failed to start server:', err.message);
     process.exit(1);
   }
 };
 
 startServer();
 
-// Graceful shutdown handler
 process.on('SIGTERM', async () => {
-  logger.info('SIGTERM received. Closing DB connection...');
   await mongoose.connection.close();
   process.exit(0);
 });
 
-module.exports = app; // For testing with supertest
+module.exports = app;

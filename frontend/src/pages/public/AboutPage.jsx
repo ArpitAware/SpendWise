@@ -222,7 +222,7 @@ export default function AboutPage() {
       </section>
 
       <footer className="border-t border-gray-200 dark:border-white/5 py-8 px-4 text-center text-sm text-gray-500 dark:text-gray-700">
-        <p>© 2026 SpendWise — MIT License. Made with ❤️ in India 🇮🇳</p>
+        <p>© 2025 SpendWise — MIT License. Made with ❤️ in India 🇮🇳</p>
       </footer>
     </div>
   );

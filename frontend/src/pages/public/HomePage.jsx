@@ -158,7 +158,7 @@ function LiveDashboard({ stats, formatAmount }) {
             <div className="bg-gray-100 dark:bg-gray-800/60 rounded-2xl p-4">
               <p className="text-xs text-gray-600 dark:text-gray-400 font-medium mb-3">By Category</p>
               <div className="space-y-2">
-                {byCategory.slice(0,4).map((c,i) => (
+                {byCategory.slice(0,2).map((c,i) => (
                   <div key={c.category} className="flex items-center gap-3">
                     <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{background:COLORS[i]}} />
                     <div className="flex-1 min-w-0">
@@ -582,7 +582,7 @@ export default function HomePage() {
               <Link key={to} to={to} className="hover:text-indigo-400 transition">{label}</Link>
             ))}
           </div>
-          <p className="text-gray-400 dark:text-gray-700 text-sm">© 2026 SpendWise — MIT License 🇮🇳</p>
+          <p className="text-gray-400 dark:text-gray-700 text-sm">© 2025 SpendWise — MIT License 🇮🇳</p>
         </div>
       </footer>
     </div>

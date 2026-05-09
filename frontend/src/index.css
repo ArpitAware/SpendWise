@@ -15,8 +15,11 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: #030712;
-    overscroll-behavior: none;
+    /* FIX: 'none' was blocking two-finger trackpad momentum on macOS — use 'contain' instead */
+    overscroll-behavior-x: none;
+    overscroll-behavior-y: contain;
     overflow-x: hidden;
+    overflow-y: auto;
     /* Kills the rubber-band white flash on macOS/iOS Safari */
     background-attachment: fixed;
   }
@@ -25,8 +28,11 @@
     background: #030712;
     margin: 0;
     padding: 0;
-    overscroll-behavior: none;
+    /* FIX: same — 'none' trapped two-finger trackpad scroll on macOS */
+    overscroll-behavior-x: none;
+    overscroll-behavior-y: contain;
     overflow-x: hidden;
+    overflow-y: auto;
     /* This is the key: body itself must be dark so overscroll area is dark */
     min-height: 100%;
     min-height: 100dvh;
@@ -36,7 +42,8 @@
     background: #030712;
     min-height: 100vh;
     min-height: 100dvh;
-    isolation: isolate;
+    /* FIX: removed isolation:isolate — it was creating a new stacking context
+       that prevented the page from scrolling correctly in some browsers */
   }
 
   /* Smooth scrolling only for user-initiated, not programmatic */

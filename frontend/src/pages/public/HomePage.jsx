@@ -335,7 +335,10 @@ function DemoPreview() {
   );
 }
 
-// ── iPhone 3D mockup component ───────────────────────────────────────────────
+// ── iPhone screen content component ──────────────────────────────────────────
+// FIX: Previously rendered a full phone shell (body, buttons, frame) which was placed
+// INSIDE the iphone-frame in the section below — causing a "phone inside a phone" bug.
+// Now it only renders screen contents that fill the iphone-screen container.
 function IPhoneMockup() {
   const [activeScreen, setActiveScreen] = useState(0);
   useEffect(() => {
@@ -346,67 +349,51 @@ function IPhoneMockup() {
   const screen = MOBILE_SCREENS[activeScreen];
 
   return (
-    <div className="relative flex justify-center items-center">
-      {/* Glow behind phone */}
-      <div className="absolute w-48 h-96 rounded-full blur-3xl opacity-40" style={{background:`linear-gradient(180deg, #6366f1, #8b5cf6)`}} />
-
-      {/* iPhone body */}
-      <div className="relative w-52 h-[420px] rounded-[3rem] shadow-2xl overflow-hidden"
-        style={{
-          background: 'linear-gradient(145deg, #1a1a2e, #16213e)',
-          boxShadow: '0 0 0 2px rgba(255,255,255,0.08), 0 0 0 4px rgba(0,0,0,0.5), 0 30px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1)',
-        }}
-      >
-        {/* Side buttons */}
-        <div className="absolute -left-1 top-20 w-1 h-8 bg-gray-600 rounded-l-sm" />
-        <div className="absolute -left-1 top-32 w-1 h-10 bg-gray-600 rounded-l-sm" />
-        <div className="absolute -left-1 top-44 w-1 h-10 bg-gray-600 rounded-l-sm" />
-        <div className="absolute -right-1 top-28 w-1 h-14 bg-gray-600 rounded-r-sm" />
-
-        {/* Screen */}
-        <div className="absolute inset-1.5 rounded-[2.5rem] overflow-hidden" style={{background:'linear-gradient(135deg, #0f0c29, #302b63, #24243e)'}}>
-          {/* Dynamic Island */}
-          <div className="absolute top-3 left-1/2 -translate-x-1/2 w-20 h-5 bg-black rounded-full z-10 flex items-center justify-center gap-1.5">
-            <div className="w-2 h-2 rounded-full bg-gray-800" />
-            <div className="w-1.5 h-1.5 rounded-full bg-gray-700" />
-          </div>
-
-          {/* Status bar */}
-          <div className="flex justify-between items-center px-5 pt-10 pb-1">
-            <span className="text-white text-[8px] font-semibold">9:41</span>
-            <div className="flex gap-1 items-center">
-              <div className="flex gap-0.5 items-end">
-                {[3,5,7,9].map((h,i) => <div key={i} className="w-0.5 rounded-sm bg-white" style={{height:`${h}px`}} />)}
-              </div>
-              <span className="text-white text-[7px]">100%</span>
-            </div>
-          </div>
-
-          {/* App header */}
-          <div className={`mx-2 mb-2 p-2 rounded-2xl bg-gradient-to-r ${screen.color} flex items-center justify-between`}>
-            <div>
-              <div className="text-white/60 text-[7px]">SpendWise</div>
-              <div className="text-white text-[10px] font-bold">{screen.label}</div>
-            </div>
-            <span className="text-xl">{screen.icon}</span>
-          </div>
-
-          {/* Screen content */}
-          <div className="transition-all duration-500">
-            {screen.content}
-          </div>
+    <div className="w-full h-full flex flex-col" style={{background:'linear-gradient(135deg, #0f0c29, #302b63, #24243e)'}}>
+      {/* Dynamic Island */}
+      <div className="relative flex justify-center pt-3 pb-1 flex-shrink-0">
+        <div className="w-24 h-6 bg-black rounded-full flex items-center justify-center gap-1.5">
+          <div className="w-2 h-2 rounded-full bg-gray-800" />
+          <div className="w-1.5 h-1.5 rounded-full bg-gray-700" />
         </div>
+      </div>
 
-        {/* Home indicator */}
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-1 bg-white/30 rounded-full" />
+      {/* Status bar */}
+      <div className="flex justify-between items-center px-5 pb-2 flex-shrink-0">
+        <span className="text-white text-[8px] font-semibold">9:41</span>
+        <div className="flex gap-1 items-center">
+          <div className="flex gap-0.5 items-end">
+            {[3,5,7,9].map((h,i) => <div key={i} className="w-0.5 rounded-sm bg-white" style={{height:`${h}px`}} />)}
+          </div>
+          <span className="text-white text-[7px] ml-1">100%</span>
+        </div>
+      </div>
+
+      {/* App header */}
+      <div className={`mx-3 mb-2 p-2.5 rounded-2xl bg-gradient-to-r ${screen.color} flex items-center justify-between flex-shrink-0`}>
+        <div>
+          <div className="text-white/60 text-[7px]">SpendWise</div>
+          <div className="text-white text-[10px] font-bold">{screen.label}</div>
+        </div>
+        <span className="text-xl">{screen.icon}</span>
+      </div>
+
+      {/* Screen content */}
+      <div className="flex-1 overflow-hidden transition-all duration-500">
+        {screen.content}
       </div>
 
       {/* Screen selector dots */}
-      <div className="absolute -bottom-8 flex gap-2">
+      <div className="flex justify-center gap-2 pb-3 pt-2 flex-shrink-0">
         {MOBILE_SCREENS.map((s, i) => (
           <button key={i} onClick={() => setActiveScreen(i)}
-            className={`w-2 h-2 rounded-full transition-all ${i === activeScreen ? 'bg-indigo-500 w-5' : 'bg-gray-600'}`} />
+            className={`h-1.5 rounded-full transition-all ${i === activeScreen ? 'bg-indigo-400 w-5' : 'bg-white/30 w-1.5'}`} />
         ))}
+      </div>
+
+      {/* Home indicator */}
+      <div className="flex justify-center pb-3 flex-shrink-0">
+        <div className="w-20 h-1 bg-white/30 rounded-full" />
       </div>
     </div>
   );
@@ -546,11 +533,11 @@ export default function HomePage() {
   }, [user]);
 
   return (
-    <div className="min-h-screen bg-gray-950" style={{ overscrollBehavior:'none' }}>
+    <div className="min-h-screen bg-gray-950">
       <PublicNavbar />
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center overflow-hidden pt-14">
+      <section className="relative min-h-screen flex items-center overflow-clip pt-14">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute inset-0" style={{ background:'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99,102,241,0.25) 0%, transparent 70%)' }} />
           <div className="animate-blob absolute top-40 left-20 w-96 h-96 bg-indigo-400/15 dark:bg-indigo-600/10 rounded-full blur-3xl" />
@@ -669,7 +656,7 @@ export default function HomePage() {
       </section>
 
       {/* ── TICKER ──────────────────────────────────────────────────────── */}
-      <div className="relative py-4 overflow-hidden border-y border-gray-100 dark:border-white/5 bg-indigo-50 dark:bg-indigo-950/40">
+      <div className="relative py-4 overflow-clip border-y border-gray-100 dark:border-white/5 bg-indigo-50 dark:bg-indigo-950/40">
         <div className="flex animate-ticker whitespace-nowrap">
           {[...TICKER,...TICKER].map((item,i) => (
             <span key={i} className="inline-flex items-center text-indigo-600 dark:text-gray-400 text-sm font-medium px-8">
@@ -881,7 +868,7 @@ export default function HomePage() {
       </section>
 
       {/* ── IPHONE SECTION — Big, proper iPhone 17 Pro Max shape ──────────── */}
-      <section className="px-4 sm:px-6 overflow-hidden relative" style={{background:'linear-gradient(180deg,#030712 0%,#070520 30%,#0a0a1a 70%,#030712 100%)'}}>
+      <section className="px-4 sm:px-6 overflow-clip relative" style={{background:'linear-gradient(180deg,#030712 0%,#070520 30%,#0a0a1a 70%,#030712 100%)'}}>
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-600/5 rounded-full blur-3xl" />
           <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-purple-600/5 rounded-full blur-3xl" />
@@ -969,7 +956,7 @@ export default function HomePage() {
       </section>
 
       {/* ── MACBOOK SECTION — Desktop responsiveness ─────────────────────── */}
-      <section className="py-24 px-4 sm:px-6 overflow-hidden relative bg-gray-950">
+      <section className="py-24 px-4 sm:px-6 overflow-clip relative bg-gray-950">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent" />
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent" />

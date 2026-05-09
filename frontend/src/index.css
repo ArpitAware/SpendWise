@@ -3,21 +3,52 @@
 @tailwind utilities;
 
 @layer base {
-  html, body, #root {
+  /* ── Nuclear fix for white overscroll / white line on scroll ────────── */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
     font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* FIX: prevent white flash on scroll overscroll */
-    background-color: #030712; /* matches dark bg */
+    background: #030712;
     overscroll-behavior: none;
+    overflow-x: hidden;
+    /* Kills the rubber-band white flash on macOS/iOS Safari */
+    background-attachment: fixed;
   }
-  html.light, html.light body, html.light #root {
-    background-color: #f9fafb;
+
+  body {
+    background: #030712;
+    margin: 0;
+    padding: 0;
+    overscroll-behavior: none;
+    overflow-x: hidden;
+    /* This is the key: body itself must be dark so overscroll area is dark */
+    min-height: 100%;
+    min-height: 100dvh;
   }
-  * { scroll-behavior: smooth; box-sizing: border-box; }
+
+  #root {
+    background: #030712;
+    min-height: 100vh;
+    min-height: 100dvh;
+    isolation: isolate;
+  }
+
+  /* Smooth scrolling only for user-initiated, not programmatic */
+  html:focus-within {
+    scroll-behavior: smooth;
+  }
+
+  /* Thin dark scrollbar */
   ::-webkit-scrollbar { width: 4px; height: 4px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.3); border-radius: 99px; }
+  ::-webkit-scrollbar-track { background: #030712; }
+  ::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.35); border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,0.6); }
 }
 
 /* ── Keyframes ───────────────────────────────────────────────────────── */
@@ -25,44 +56,41 @@
 @keyframes float-slow   { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-10px) rotate(3deg)} }
 @keyframes blob         { 0%,100%{border-radius:60% 40% 30% 70%/60% 30% 70% 40%} 50%{border-radius:30% 60% 70% 40%/50% 60% 30% 60%} }
 @keyframes slide-up     { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
-@keyframes slide-in-left{ from{opacity:0;transform:translateX(-40px)} to{opacity:1;transform:translateX(0)} }
+@keyframes slide-left   { from{opacity:0;transform:translateX(-40px)} to{opacity:1;transform:translateX(0)} }
 @keyframes fade-in      { from{opacity:0} to{opacity:1} }
 @keyframes shimmer      { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
 @keyframes ticker       { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 @keyframes spin-slow    { to{transform:rotate(360deg)} }
 @keyframes pulse-glow   { 0%,100%{box-shadow:0 0 0 0 rgba(99,102,241,0.4)} 50%{box-shadow:0 0 0 20px rgba(99,102,241,0)} }
-@keyframes gradient-x   { 0%,100%{background-size:200% 200%;background-position:left center} 50%{background-size:200% 200%;background-position:right center} }
-@keyframes count-up     { from{opacity:0;transform:scale(0.7)} to{opacity:1;transform:scale(1)} }
 @keyframes tilt         { 0%,100%{transform:rotate(-1deg) scale(1)} 50%{transform:rotate(1deg) scale(1.01)} }
-@keyframes orbit        { to{transform:rotate(360deg) translateX(120px) rotate(-360deg)} }
-@keyframes orbit2       { to{transform:rotate(-360deg) translateX(80px) rotate(360deg)} }
+@keyframes phone-float  { 0%,100%{transform:perspective(1000px) rotateY(-8deg) rotateX(4deg) translateY(0)} 50%{transform:perspective(1000px) rotateY(-8deg) rotateX(4deg) translateY(-12px)} }
+@keyframes glow-pulse   { 0%,100%{opacity:0.4} 50%{opacity:0.8} }
+@keyframes feature-in   { from{opacity:0;transform:translateY(20px) scale(0.95)} to{opacity:1;transform:translateY(0) scale(1)} }
 
 /* ── Animation classes ───────────────────────────────────────────────── */
-.animate-float       { animation: float 6s ease-in-out infinite; }
-.animate-float-slow  { animation: float-slow 9s ease-in-out infinite; }
-.animate-blob        { animation: blob 10s ease-in-out infinite; }
-.animate-slide-up    { animation: slide-up 0.7s ease-out both; }
-.animate-slide-left  { animation: slide-in-left 0.7s ease-out both; }
-.animate-fade-in     { animation: fade-in 0.6s ease-out both; }
-.animate-ticker      { animation: ticker 35s linear infinite; }
-.animate-spin-slow   { animation: spin-slow 20s linear infinite; }
-.animate-pulse-glow  { animation: pulse-glow 2s ease-in-out infinite; }
-.animate-gradient-x  { animation: gradient-x 4s ease infinite; }
-.animate-tilt        { animation: tilt 6s ease-in-out infinite; }
-.animate-orbit       { animation: orbit 8s linear infinite; }
-.animate-orbit2      { animation: orbit2 12s linear infinite; }
+.animate-float        { animation: float 6s ease-in-out infinite; }
+.animate-float-slow   { animation: float-slow 9s ease-in-out infinite; }
+.animate-blob         { animation: blob 10s ease-in-out infinite; }
+.animate-slide-up     { animation: slide-up 0.7s ease-out both; }
+.animate-slide-left   { animation: slide-left 0.7s ease-out both; }
+.animate-fade-in      { animation: fade-in 0.6s ease-out both; }
+.animate-ticker       { animation: ticker 35s linear infinite; }
+.animate-spin-slow    { animation: spin-slow 20s linear infinite; }
+.animate-pulse-glow   { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-tilt         { animation: tilt 6s ease-in-out infinite; }
+.animate-phone-float  { animation: phone-float 5s ease-in-out infinite; }
+.animate-glow-pulse   { animation: glow-pulse 3s ease-in-out infinite; }
 
 /* ── Delays ──────────────────────────────────────────────────────────── */
-.delay-100  { animation-delay:.1s  }
-.delay-200  { animation-delay:.2s  }
-.delay-300  { animation-delay:.3s  }
-.delay-400  { animation-delay:.4s  }
-.delay-500  { animation-delay:.5s  }
-.delay-700  { animation-delay:.7s  }
-.delay-1000 { animation-delay:1s   }
-.delay-2000 { animation-delay:2s   }
-.delay-3000 { animation-delay:3s   }
-.delay-4000 { animation-delay:4s   }
+.delay-100  { animation-delay: .1s  }
+.delay-200  { animation-delay: .2s  }
+.delay-300  { animation-delay: .3s  }
+.delay-400  { animation-delay: .4s  }
+.delay-500  { animation-delay: .5s  }
+.delay-700  { animation-delay: .7s  }
+.delay-1000 { animation-delay: 1s   }
+.delay-2000 { animation-delay: 2s   }
+.delay-3000 { animation-delay: 3s   }
 
 /* ── Visual effects ──────────────────────────────────────────────────── */
 .shimmer-text {
@@ -92,9 +120,6 @@
   transform: translateY(-6px) scale(1.01);
   box-shadow: 0 24px 48px rgba(99,102,241,0.18);
 }
-.glow-indigo   { box-shadow: 0 0 40px rgba(99,102,241,0.35); }
-.glow-purple   { box-shadow: 0 0 40px rgba(168,85,247,0.35); }
-.glow-emerald  { box-shadow: 0 0 40px rgba(16,185,129,0.35); }
 
 /* ── Scroll reveal ───────────────────────────────────────────────────── */
 .reveal {
@@ -102,55 +127,47 @@
   transform: translateY(32px);
   transition: opacity 0.75s ease, transform 0.75s ease;
 }
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.reveal.visible { opacity: 1; transform: translateY(0); }
 .reveal-left {
   opacity: 0;
   transform: translateX(-32px);
   transition: opacity 0.75s ease, transform 0.75s ease;
 }
-.reveal-left.visible {
-  opacity: 1;
-  transform: translateX(0);
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+/* ── iPhone 17 Pro Max shape ─────────────────────────────────────────── */
+.iphone-frame {
+  border-radius: 54px;
+  background: linear-gradient(145deg, #1c1c1e, #2c2c2e, #1c1c1e);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.12),
+    0 0 0 3px rgba(0,0,0,0.8),
+    0 0 0 4px rgba(255,255,255,0.06),
+    0 40px 120px rgba(0,0,0,0.7),
+    0 0 80px rgba(99,102,241,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.15),
+    inset 0 -1px 0 rgba(0,0,0,0.5);
+}
+.iphone-screen {
+  border-radius: 46px;
+  overflow: hidden;
 }
 
-/* ── 3D card tilt (JS-driven) ────────────────────────────────────────── */
-.card-3d {
+/* ── Feature card 3D hover ───────────────────────────────────────────── */
+.feature-3d {
   transform-style: preserve-3d;
-  transition: transform 0.15s ease;
+  transition: transform 0.4s cubic-bezier(.34,1.56,.64,1), box-shadow 0.4s ease;
 }
-.card-3d-inner {
-  transform: translateZ(20px);
-}
-
-/* ── Gradient borders ────────────────────────────────────────────────── */
-.gradient-border {
-  position: relative;
-}
-.gradient-border::before {
-  content:'';
-  position:absolute;
-  inset:-1px;
-  border-radius:inherit;
-  background: linear-gradient(135deg,#6366f1,#a855f7,#ec4899);
-  z-index:-1;
+.feature-3d:hover {
+  transform: perspective(800px) rotateY(-4deg) rotateX(4deg) translateY(-8px);
+  box-shadow: 12px 16px 40px rgba(99,102,241,0.2), 0 0 0 1px rgba(99,102,241,0.3);
 }
 
-/* ── Noise texture overlay ───────────────────────────────────────────── */
-.noise::after {
-  content:'';
-  position:absolute;
-  inset:0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events:none;
-  border-radius:inherit;
-}
+/* ── Responsive section gap fix (white line source) ─────────────────── */
 
-/* ── Overscroll bg fix ───────────────────────────────────────────────── */
-body {
-  background: #030712;
-  min-height: 100vh;
+/* ── Section gap elimination ─────────────────────────────────────────── */
+/* Ensures adjacent sections with different bg colors have no sub-pixel gap */
+.section-seamless {
+  margin-top: -1px;
+  padding-top: 1px;
 }
-.dark body { background: #030712; }

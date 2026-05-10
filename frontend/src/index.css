@@ -177,3 +177,18 @@
   margin-top: -1px;
   padding-top: 1px;
 }
+
+/* ── Navbar dropdown animation ───────────────────────────────────────── */
+@keyframes dropdown-in {
+  from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+.dropdown-in {
+  animation: dropdown-in 0.18s cubic-bezier(.34,1.56,.64,1) both;
+}
+
+/* ── Navbar floating pill ────────────────────────────────────────────── */
+/* Ensures the floating navbar never shows content behind it on scroll */
+.navbar-float {
+  isolation: isolate;
+}

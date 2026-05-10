@@ -537,7 +537,7 @@ export default function HomePage() {
       <PublicNavbar />
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center overflow-clip pt-14">
+      <section className="relative min-h-screen flex items-center overflow-clip pt-20">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute inset-0" style={{ background:'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99,102,241,0.25) 0%, transparent 70%)' }} />
           <div className="animate-blob absolute top-40 left-20 w-96 h-96 bg-indigo-400/15 dark:bg-indigo-600/10 rounded-full blur-3xl" />

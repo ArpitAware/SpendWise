@@ -10,26 +10,28 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%236366f1'/><text y='.9em' font-size='68' x='15' fill='white'>₹</text></svg>" />
-    <!-- CRITICAL: Prevent ANY white flash or white line during scroll -->
     <style>
+      /* Applied before any JS — prevents white flash on any browser */
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-      html, body {
-        background: #030712 !important;
-        background-color: #030712 !important;
-        color-scheme: dark;
-        overscroll-behavior: none;
-        overflow-x: hidden;
+      html {
+        background: #030712;
+        overflow: hidden;     /* html is NOT the scroll container */
+        height: 100%;
+        touch-action: pan-y;
       }
       body {
-        min-height: 100vh;
-        min-height: 100dvh;
+        background: #030712;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: scroll;   /* body IS the scroll container */
+        overscroll-behavior: none;
+        touch-action: pan-y;
+        -webkit-overflow-scrolling: touch;
       }
       #root {
         background: #030712;
         min-height: 100vh;
-        min-height: 100dvh;
       }
-      /* Kill WebKit overscroll area */
       ::-webkit-scrollbar-track { background: #030712; }
     </style>
   </head>

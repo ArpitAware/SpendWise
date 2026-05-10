@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 
-// Apply dark class immediately to prevent flash
+// Apply dark class immediately before render — no style changes after this
 const saved = localStorage.getItem('theme');
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-if (saved === 'dark' || (!saved && prefersDark) || saved === 'system' && prefersDark) {
-  document.documentElement.classList.add('dark');
-  document.body.style.background = '#030712';
+if (saved === 'light') {
+  document.documentElement.classList.remove('dark');
 } else {
-  document.body.style.background = '#f9fafb';
+  // Default to dark for public pages
+  document.documentElement.classList.add('dark');
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(

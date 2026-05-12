@@ -70,7 +70,7 @@ export default function PublicNavbar() {
       {/* ── DESKTOP NAV ─────────────────────────────────────────────── */}
       <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4 pointer-events-none">
         <nav
-          className={`pointer-events-auto w-full max-w-4xl transition-all duration-500 ${
+          className={`navbar-pill pointer-events-auto w-full max-w-4xl transition-all duration-500 ${
             scrolled
               ? 'rounded-2xl shadow-2xl shadow-black/40'
               : 'rounded-2xl'
@@ -115,19 +115,19 @@ export default function PublicNavbar() {
                 }}
               />
               {NAV_LINKS.map(({ to, label }) => (
-                <NavLink
-                  key={to}
-                  to={to}
-                  end
-                  ref={el => { if (el) linksRef.current[to] = el; }}
-                  className={({ isActive }) =>
-                    `relative flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium transition-colors duration-200 ${
-                      isActive ? 'text-white' : 'text-gray-400 hover:text-white'
-                    }`
-                  }
-                >
-                  {label}
-                </NavLink>
+                <span key={to} ref={el => { if (el) linksRef.current[to] = el; }}>
+                  <NavLink
+                    to={to}
+                    end
+                    className={({ isActive }) =>
+                      `relative flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium transition-colors duration-200 ${
+                        isActive ? 'text-white' : 'text-gray-400 hover:text-white'
+                      }`
+                    }
+                  >
+                    {label}
+                  </NavLink>
+                </span>
               ))}
             </div>
 
@@ -282,7 +282,7 @@ export default function PublicNavbar() {
                 `flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                   isActive
                     ? 'bg-indigo-600/20 text-white border border-indigo-500/30'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    : 'text-gray-300 hover:text-white hover:bg-white/5'
                 }`
               }
             >

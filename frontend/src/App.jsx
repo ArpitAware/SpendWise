@@ -25,6 +25,7 @@ const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const ExpensesPage  = lazy(() => import('./pages/ExpensesPage'));
 const BudgetPage    = lazy(() => import('./pages/BudgetPage'));
 const ProfilePage   = lazy(() => import('./pages/ProfilePage'));
+const StocksPage    = lazy(() => import('./pages/StocksPage'));
 
 import Layout from './components/layout/Layout';
 import LoadingSpinner from './components/ui/LoadingSpinner';
@@ -73,6 +74,7 @@ export default function App() {
                     <Route path="/expenses"  element={<ExpensesPage />} />
                     <Route path="/budget"    element={<BudgetPage />} />
                     <Route path="/profile"   element={<ProfilePage />} />
+                    <Route path="/stocks"    element={<StocksPage />} />
                   </Route>
                 </Route>
 

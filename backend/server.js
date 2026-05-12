@@ -16,6 +16,7 @@ require('dotenv').config();
 const authRoutes     = require('./routes/auth.routes');
 const expenseRoutes  = require('./routes/expense.routes');
 const budgetRoutes   = require('./routes/budget.routes');
+const stocksRoutes   = require('./routes/stocks.routes');
 const { errorHandler, notFound } = require('./middleware/error.middleware');
 const logger = require('./utils/logger');
 
@@ -63,6 +64,7 @@ if (process.env.NODE_ENV !== 'production') {
 app.use('/api/auth',     authRoutes);
 app.use('/api/expenses', expenseRoutes);
 app.use('/api/budgets',  budgetRoutes);
+app.use('/api/stocks',   stocksRoutes);
 
 // Health check — Render pings this to keep the service awake
 app.get('/api/health', (req, res) => {

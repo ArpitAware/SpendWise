@@ -122,3 +122,8 @@ export const budgetAPI = {
 };
 
 export default api;
+
+// ─── Stocks API ──────────────────────────────────────────────────────────────
+export const stocksAPI = {
+  getAll: () => api.get('/stocks'),
+};

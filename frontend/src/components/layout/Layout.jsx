@@ -9,14 +9,15 @@ import { useTheme } from '../../context/ThemeContext';
 import { useCurrency, CURRENCIES } from '../../context/CurrencyContext';
 import {
   FiGrid, FiList, FiTarget, FiUser, FiLogOut,
-  FiSun, FiMoon, FiMenu, FiX, FiHome, FiChevronDown,
+  FiSun, FiMoon, FiMenu, FiX, FiHome, FiChevronDown, FiTrendingUp,
 } from 'react-icons/fi';
 
 const NAV_ITEMS = [
   { to: '/dashboard', icon: FiGrid,   label: 'Dashboard' },
   { to: '/expenses',  icon: FiList,   label: 'Expenses'  },
   { to: '/budget',    icon: FiTarget, label: 'Budget'    },
-  { to: '/profile',   icon: FiUser,   label: 'Profile'   },
+  { to: '/profile',   icon: FiUser,      label: 'Profile'   },
+  { to: '/stocks',    icon: FiTrendingUp, label: 'Stocks 📈' },
 ];
 
 function CurrencyPicker() {

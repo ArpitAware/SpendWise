@@ -192,3 +192,13 @@
 .navbar-float {
   isolation: isolate;
 }
+
+
+/* ── Floating navbar links — scoped, no side effects ──────────────────── */
+.navbar-pill a,
+.navbar-pill a:hover,
+.navbar-pill a:visited,
+.navbar-pill a:active {
+  text-decoration: none;
+  outline: none;
+}

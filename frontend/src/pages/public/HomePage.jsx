@@ -314,7 +314,7 @@ function DemoPreview() {
         </div>
         <div className="flex items-end gap-1.5 h-20">
           {DEMO_MONTHS.map((m,i) => (
-            <div key={m.name} className="flex-1 flex flex-col items-center gap-1">
+            <div key={`bar-${i}`} className="flex-1 flex flex-col items-center gap-1">
               <div className={`w-full rounded-t-md transition-all duration-500 ${
                 i === active ? 'bg-indigo-500 shadow-lg shadow-indigo-500/40' : 'bg-gray-300 dark:bg-gray-700'
               }`} style={{ height:`${(m.total/28700)*100}%`, minHeight:4 }} />
@@ -323,7 +323,7 @@ function DemoPreview() {
         </div>
         <div className="flex mt-2">
           {DEMO_MONTHS.map((m,i) => (
-            <span key={m.name} className={`flex-1 text-center text-[10px] transition-colors ${i === active ? 'text-indigo-600 dark:text-indigo-400 font-bold' : 'text-gray-400 dark:text-gray-600'}`}>{m.name}</span>
+            <span key={`demo-month-${i}`} className={`flex-1 text-center text-[10px] transition-colors ${i === active ? 'text-indigo-600 dark:text-indigo-400 font-bold' : 'text-gray-400 dark:text-gray-600'}`}>{m.name}</span>
           ))}
         </div>
       </div>
@@ -720,7 +720,7 @@ export default function HomePage() {
                     </div>
                     <div className="flex mt-1">
                       {['J','F','M','A','M','J','J','A','S','O','N','D'].map((m,i) => (
-                        <span key={m} className={`flex-1 text-center text-[7px] ${i===9?'text-indigo-400 font-bold':'text-gray-600'}`}>{m}</span>
+                        <span key={`mac-month-${i}`} className={`flex-1 text-center text-[7px] ${i===9?'text-indigo-400 font-bold':'text-gray-600'}`}>{m}</span>
                       ))}
                     </div>
                   </div>

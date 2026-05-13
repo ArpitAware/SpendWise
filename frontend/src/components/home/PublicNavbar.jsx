@@ -7,7 +7,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import {
   FiMenu, FiX, FiGrid, FiUser, FiLogOut,
-  FiChevronDown, FiHome, FiInfo, FiTag,
+  FiChevronDown, FiHome, FiInfo, FiTag, FiTrendingUp,
 } from 'react-icons/fi';
 
 const NAV_LINKS = [
@@ -169,12 +169,19 @@ export default function PublicNavbar() {
                         <p className="text-gray-500 text-xs truncate">{user.email}</p>
                       </div>
                       <div className="py-1">
-                        <Link to="/dashboard" onClick={() => setDropOpen(false)}
+                            <Link to="/dashboard" onClick={() => setDropOpen(false)}
                           className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
                           <div className="w-7 h-7 rounded-lg bg-indigo-500/15 flex items-center justify-center">
                             <FiGrid className="w-3.5 h-3.5 text-indigo-400" />
                           </div>
                           Dashboard
+                        </Link>
+                        <Link to="/stocks" onClick={() => setDropOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
+                          <div className="w-7 h-7 rounded-lg bg-emerald-500/15 flex items-center justify-center">
+                            <FiTrendingUp className="w-3.5 h-3.5 text-emerald-400" />
+                          </div>
+                          Stocks 📈
                         </Link>
                         <Link to="/profile" onClick={() => setDropOpen(false)}
                           className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">

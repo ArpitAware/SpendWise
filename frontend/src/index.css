@@ -19,14 +19,14 @@
     font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: #030712;
+    background: #0d0908;
     overflow: hidden;             /* html is NOT the scroller */
     height: 100%;
     touch-action: pan-y;
   }
 
   body {
-    background: #030712;
+    background: #0d0908;
     margin: 0;
     padding: 0;
     height: 100%;
@@ -39,16 +39,16 @@
   }
 
   #root {
-    background: #030712;
+    background: #0d0908;
     min-height: 100vh;
     min-height: 100dvh;
   }
 
   /* Dark scrollbar */
   ::-webkit-scrollbar { width: 4px; height: 4px; }
-  ::-webkit-scrollbar-track { background: #030712; }
-  ::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.35); border-radius: 99px; }
-  ::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,0.6); }
+  ::-webkit-scrollbar-track { background: #0d0908; }
+  ::-webkit-scrollbar-thumb { background: rgba(228,61,18,0.35); border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(228,61,18,0.6); }
 }
 
 /* ── Keyframes ─────────────────────────────────────────────────────── */
@@ -61,7 +61,7 @@
 @keyframes shimmer     { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
 @keyframes ticker      { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 @keyframes spin-slow   { to{transform:rotate(360deg)} }
-@keyframes pulse-glow  { 0%,100%{box-shadow:0 0 0 0 rgba(99,102,241,0.4)} 50%{box-shadow:0 0 0 20px rgba(99,102,241,0)} }
+@keyframes pulse-glow  { 0%,100%{box-shadow:0 0 0 0 rgba(228,61,18,0.4)} 50%{box-shadow:0 0 0 20px rgba(228,61,18,0)} }
 @keyframes tilt        { 0%,100%{transform:rotate(-1deg) scale(1)} 50%{transform:rotate(1deg) scale(1.01)} }
 @keyframes phone-float { 0%,100%{transform:perspective(1000px) rotateY(-8deg) rotateX(4deg) translateY(0)} 50%{transform:perspective(1000px) rotateY(-8deg) rotateX(4deg) translateY(-12px)} }
 @keyframes glow-pulse  { 0%,100%{opacity:0.4} 50%{opacity:0.8} }
@@ -103,7 +103,7 @@
 
 /* ── Visual effects ────────────────────────────────────────────────── */
 .shimmer-text {
-  background: linear-gradient(90deg,#6366f1,#a855f7,#ec4899,#6366f1);
+  background: linear-gradient(90deg,#E43D12,#D6536D,#EFB11D,#E43D12);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -120,14 +120,14 @@
   background: rgba(15,15,30,0.7);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(99,102,241,0.2);
+  border: 1px solid rgba(228,61,18,0.2);
 }
 .card-hover {
   transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s ease;
 }
 .card-hover:hover {
   transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 24px 48px rgba(99,102,241,0.18);
+  box-shadow: 0 24px 48px rgba(228,61,18,0.18);
 }
 
 /* ── Scroll reveal ─────────────────────────────────────────────────── */
@@ -153,7 +153,7 @@
     0 0 0 3px rgba(0,0,0,0.8),
     0 0 0 4px rgba(255,255,255,0.06),
     0 40px 120px rgba(0,0,0,0.7),
-    0 0 80px rgba(99,102,241,0.15),
+    0 0 80px rgba(228,61,18,0.15),
     inset 0 1px 0 rgba(255,255,255,0.15),
     inset 0 -1px 0 rgba(0,0,0,0.5);
 }
@@ -169,7 +169,7 @@
 }
 .feature-3d:hover {
   transform: perspective(800px) rotateY(-4deg) rotateX(4deg) translateY(-8px);
-  box-shadow: 12px 16px 40px rgba(99,102,241,0.2), 0 0 0 1px rgba(99,102,241,0.3);
+  box-shadow: 12px 16px 40px rgba(228,61,18,0.2), 0 0 0 1px rgba(228,61,18,0.3);
 }
 
 /* ── Section seamless join ─────────────────────────────────────────── */

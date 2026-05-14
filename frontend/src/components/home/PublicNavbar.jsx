@@ -77,15 +77,15 @@ export default function PublicNavbar() {
           }`}
           style={{
             background: scrolled
-              ? 'rgba(10, 10, 20, 0.85)'
-              : 'rgba(10, 10, 20, 0.65)',
+              ? 'rgba(13, 9, 8, 0.92)'
+              : 'rgba(13, 9, 8, 0.70)',
             backdropFilter: 'blur(24px) saturate(180%)',
             WebkitBackdropFilter: 'blur(24px) saturate(180%)',
             border: scrolled
-              ? '1px solid rgba(99,102,241,0.25)'
+              ? '1px solid rgba(228,61,18,0.25)'
               : '1px solid rgba(255,255,255,0.08)',
             boxShadow: scrolled
-              ? '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 1px rgba(99,102,241,0.1)'
+              ? '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 1px rgba(228,61,18,0.1)'
               : '0 2px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)',
           }}
         >
@@ -93,13 +93,13 @@ export default function PublicNavbar() {
 
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2.5 group flex-shrink-0">
-              <div className="relative w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg overflow-hidden">
+              <div className="relative w-8 h-8 rounded-xl bg-gradient-to-br bg-[#E43D12] flex items-center justify-center shadow-lg overflow-hidden">
                 {/* Shine sweep */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                 <span className="relative text-white font-black text-base">₹</span>
               </div>
               <span className="font-black text-lg text-white tracking-tight">
-                Spend<span className="text-indigo-400">Wise</span>
+                Spend<span className="text-[#E43D12]">Wise</span>
               </span>
             </Link>
 
@@ -141,7 +141,7 @@ export default function PublicNavbar() {
                   >
                     {/* Avatar with ring */}
                     <div className="relative">
-                      <div className="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-xs ring-2 ring-indigo-500/30">
+                      <div className="w-7 h-7 rounded-full bg-gradient-to-br bg-[#E43D12] flex items-center justify-center text-white font-bold text-xs ring-2 ring-[#E43D12]/30">
                         {initial}
                       </div>
                       {/* Online dot */}
@@ -159,7 +159,7 @@ export default function PublicNavbar() {
                         background: 'rgba(12,12,24,0.95)',
                         backdropFilter: 'blur(20px)',
                         border: '1px solid rgba(255,255,255,0.08)',
-                        boxShadow: '0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(99,102,241,0.1)',
+                        boxShadow: '0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(228,61,18,0.1)',
                         animation: 'slide-up 0.15s ease-out both',
                       }}
                     >
@@ -171,22 +171,22 @@ export default function PublicNavbar() {
                       <div className="py-1">
                             <Link to="/dashboard" onClick={() => setDropOpen(false)}
                           className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
-                          <div className="w-7 h-7 rounded-lg bg-indigo-500/15 flex items-center justify-center">
-                            <FiGrid className="w-3.5 h-3.5 text-indigo-400" />
+                          <div className="w-7 h-7 rounded-lg bg-[#E43D12]/15 flex items-center justify-center">
+                            <FiGrid className="w-3.5 h-3.5 text-[#E43D12]" />
                           </div>
                           Dashboard
                         </Link>
                         <Link to="/stocks" onClick={() => setDropOpen(false)}
                           className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
-                          <div className="w-7 h-7 rounded-lg bg-emerald-500/15 flex items-center justify-center">
-                            <FiTrendingUp className="w-3.5 h-3.5 text-emerald-400" />
+                          <div className="w-7 h-7 rounded-lg bg-[#EFB11D]/15 flex items-center justify-center">
+                            <FiTrendingUp className="w-3.5 h-3.5 text-[#EFB11D]" />
                           </div>
                           Stocks 📈
                         </Link>
                         <Link to="/profile" onClick={() => setDropOpen(false)}
                           className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
-                          <div className="w-7 h-7 rounded-lg bg-purple-500/15 flex items-center justify-center">
-                            <FiUser className="w-3.5 h-3.5 text-purple-400" />
+                          <div className="w-7 h-7 rounded-lg bg-[#fdf0f2]0/15 flex items-center justify-center">
+                            <FiUser className="w-3.5 h-3.5 text-[#D6536D]" />
                           </div>
                           Profile
                         </Link>
@@ -218,7 +218,7 @@ export default function PublicNavbar() {
                     className="relative flex items-center gap-1.5 px-5 py-2 rounded-xl text-sm font-semibold text-white overflow-hidden group"
                     style={{
                       background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
-                      boxShadow: '0 0 20px rgba(99,102,241,0.35)',
+                      boxShadow: '0 0 20px rgba(228,61,18,0.35)',
                     }}
                   >
                     {/* Animated shine */}
@@ -267,10 +267,10 @@ export default function PublicNavbar() {
         {/* Drawer header */}
         <div className="flex items-center justify-between px-5 h-16 border-b border-white/5">
           <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br bg-[#E43D12] flex items-center justify-center">
               <span className="text-white font-black text-sm">₹</span>
             </div>
-            <span className="font-black text-white">Spend<span className="text-indigo-400">Wise</span></span>
+            <span className="font-black text-white">Spend<span className="text-[#E43D12]">Wise</span></span>
           </Link>
           <button onClick={() => setMobileOpen(false)} className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-white hover:bg-white/8 transition">
             <FiX className="w-5 h-5" />
@@ -288,7 +288,7 @@ export default function PublicNavbar() {
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                   isActive
-                    ? 'bg-indigo-600/20 text-white border border-indigo-500/30'
+                    ? 'text-white border border-[#E43D12]/30'
                     : 'text-gray-300 hover:text-white hover:bg-white/5'
                 }`
               }
@@ -304,7 +304,7 @@ export default function PublicNavbar() {
           {user ? (
             <div className="space-y-2">
               <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white/4">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br bg-[#E43D12] flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                   {initial}
                 </div>
                 <div className="min-w-0">
@@ -314,7 +314,7 @@ export default function PublicNavbar() {
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <Link to="/dashboard" onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-center gap-1.5 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-semibold">
+                  className="flex items-center justify-center gap-1.5 py-2.5 bg-[#E43D12] text-white rounded-xl text-sm font-semibold">
                   <FiGrid className="w-4 h-4" /> Dashboard
                 </Link>
                 <button onClick={() => { logout(); setMobileOpen(false); }}
@@ -327,7 +327,7 @@ export default function PublicNavbar() {
             <div className="space-y-2">
               <Link to="/register" onClick={() => setMobileOpen(false)}
                 className="flex items-center justify-center w-full py-3 rounded-xl text-sm font-bold text-white"
-                style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', boxShadow: '0 0 20px rgba(99,102,241,0.3)' }}>
+                style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', boxShadow: '0 0 20px rgba(228,61,18,0.3)' }}>
                 Get Started Free ↗
               </Link>
               <Link to="/login" onClick={() => setMobileOpen(false)}

@@ -60,12 +60,12 @@ const DEMO_CATS = [
   {category:'Bills',total:18600},
   {category:'Entertainment',total:9400},
 ];
-const COLORS = ['#6366f1','#8b5cf6','#ec4899','#f59e0b','#10b981'];
+const COLORS = ['#E43D12','#8b5cf6','#ec4899','#f59e0b','#10b981'];
 const MONTHS_FULL = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 const FEATURES = [
-  { icon: FiPieChart,   color:'from-indigo-500 to-indigo-700',  title:'Smart Dashboard',    desc:'Real-time charts update as you add expenses. Area charts, pie charts, and bar charts give you complete clarity.' },
-  { icon: FiShield,     color:'from-purple-500 to-purple-700',  title:'Budget Alerts',       desc:'Set monthly limits per category. Get alerted at your chosen threshold — 70%, 80%, or 90%. You decide.' },
+  { icon: FiPieChart,   color:'bg-[#E43D12]',  title:'Smart Dashboard',    desc:'Real-time charts update as you add expenses. Area charts, pie charts, and bar charts give you complete clarity.' },
+  { icon: FiShield,     color:'from-[#D6536D] to-[#b8344e]',  title:'Budget Alerts',       desc:'Set monthly limits per category. Get alerted at your chosen threshold — 70%, 80%, or 90%. You decide.' },
   { icon: FiTrendingUp, color:'from-pink-500 to-rose-600',      title:'Expense Tracking',    desc:'10 categories, UPI/card/cash tracking, notes, tags, full-text search and powerful date-range filters.' },
   { icon: FiZap,        color:'from-amber-500 to-orange-600',   title:'Instant Insights',    desc:'MongoDB aggregation pipelines compute your year-over-year trends and category breakdowns in milliseconds.' },
   { icon: FiDownload,   color:'from-emerald-500 to-teal-600',   title:'CSV Export',          desc:'Download your complete expense history as CSV. Filter by date range before exporting for custom reports.' },
@@ -85,7 +85,7 @@ const MOBILE_SCREENS = [
   {
     label: 'Add Expense',
     icon: '➕',
-    color: 'from-indigo-600 to-purple-700',
+    color: 'from-[#E43D12] to-[#c4330f]',
     content: (
       <div className="p-3 space-y-2">
         <div className="bg-white/10 rounded-xl p-2.5">
@@ -106,7 +106,7 @@ const MOBILE_SCREENS = [
           <div className="text-white/50 text-[9px] mb-1">Payment</div>
           <div className="text-white text-xs font-medium">💳 UPI</div>
         </div>
-        <div className="w-full py-2 bg-white rounded-xl text-indigo-700 text-xs font-bold text-center mt-2">
+        <div className="w-full py-2 bg-white rounded-xl text-[#E43D12] text-xs font-bold text-center mt-2">
           Add Expense ✓
         </div>
       </div>
@@ -119,11 +119,11 @@ const MOBILE_SCREENS = [
     content: (
       <div className="p-3 space-y-2">
         <div className="grid grid-cols-2 gap-1.5">
-          <div className="bg-indigo-500/40 rounded-xl p-2 text-center">
+          <div className="bg-[#E43D12]/40 rounded-xl p-2 text-center">
             <div className="text-white text-xs font-black">₹12,450</div>
             <div className="text-white/60 text-[8px]">This Month</div>
           </div>
-          <div className="bg-purple-500/40 rounded-xl p-2 text-center">
+          <div className="bg-[#fdf0f2]0/40 rounded-xl p-2 text-center">
             <div className="text-white text-xs font-black">₹84,320</div>
             <div className="text-white/60 text-[8px]">Total Spent</div>
           </div>
@@ -141,7 +141,7 @@ const MOBILE_SCREENS = [
             <div key={cat} className="flex items-center gap-2">
               <span className="text-white/60 text-[8px] w-12">{cat}</span>
               <div className="flex-1 h-1 bg-white/15 rounded-full overflow-hidden">
-                <div className="h-full bg-indigo-400 rounded-full" style={{width:pct}} />
+                <div className="h-full bg-[#E43D12] rounded-full" style={{width:pct}} />
               </div>
               <span className="text-white text-[8px] font-medium">{amt}</span>
             </div>
@@ -217,7 +217,7 @@ function LiveDashboard({ stats, formatAmount }) {
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
         {[
-          { label:'Total Spent', val: formatAmount(totalSpent), color:'from-indigo-600 to-indigo-800' },
+          { label:'Total Spent', val: formatAmount(totalSpent), color:'bg-[#E43D12]' },
           { label:'This Month',  val: formatAmount(thisMonth),  color:'from-purple-600 to-purple-800' },
         ].map((c) => (
           <div key={c.label} className={`p-5 rounded-2xl bg-gradient-to-br ${c.color} shadow-lg animate-float delay-${c.label==='Total Spent'?'100':'200'}`}>
@@ -235,13 +235,13 @@ function LiveDashboard({ stats, formatAmount }) {
               <AreaChart data={monthlyData}>
                 <defs>
                   <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%"  stopColor="#6366f1" stopOpacity={0.5} />
-                    <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
+                    <stop offset="5%"  stopColor="#E43D12" stopOpacity={0.5} />
+                    <stop offset="95%" stopColor="#E43D12" stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <XAxis dataKey="name" tick={{ fontSize:10, fill:'#6b7280' }} axisLine={false} tickLine={false} />
                 <Tooltip formatter={(v) => [formatAmount(v),'Spent']} contentStyle={{ background:'#1f2937', border:'none', borderRadius:12, fontSize:12 }} />
-                <Area type="monotone" dataKey="total" stroke="#6366f1" strokeWidth={2} fill="url(#lg)" />
+                <Area type="monotone" dataKey="total" stroke="#E43D12" strokeWidth={2} fill="url(#lg)" />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -266,7 +266,7 @@ function LiveDashboard({ stats, formatAmount }) {
               </div>
             </div>
           )}
-          <Link to="/dashboard" className="flex items-center justify-center gap-2 w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl text-sm font-semibold transition group">
+          <Link to="/dashboard" className="flex items-center justify-center gap-2 w-full py-3 bg-[#E43D12] hover:bg-[#E43D12] text-white rounded-2xl text-sm font-semibold transition group">
             <FiGrid className="w-4 h-4" />
             Open Full Dashboard
             <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -277,7 +277,7 @@ function LiveDashboard({ stats, formatAmount }) {
           <span className="text-3xl block mb-2">💸</span>
           <p className="text-gray-700 dark:text-gray-300 text-sm font-medium">No expenses yet</p>
           <p className="text-gray-500 dark:text-gray-500 text-xs mt-1">Add your first expense to see live charts here</p>
-          <Link to="/expenses" className="inline-block mt-4 px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm font-semibold hover:bg-indigo-500 transition">
+          <Link to="/expenses" className="inline-block mt-4 px-4 py-2 bg-[#E43D12] text-white rounded-xl text-sm font-semibold hover:bg-[#E43D12] transition">
             Add Expense →
           </Link>
         </div>
@@ -297,7 +297,7 @@ function DemoPreview() {
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
         {[
-          { label:'Total Spent', val:'₹84,320', color:'from-indigo-600 to-indigo-800', emoji:'💸' },
+          { label:'Total Spent', val:'₹84,320', color:'bg-[#E43D12]', emoji:'💸' },
           { label:'This Month',  val:'₹12,450', color:'from-purple-600 to-purple-800', emoji:'📅' },
         ].map((c,i) => (
           <div key={c.label} className={`p-5 rounded-2xl bg-gradient-to-br ${c.color} shadow-lg animate-float delay-${(i+1)*100}`}>
@@ -310,24 +310,24 @@ function DemoPreview() {
       <div className="bg-gray-100 dark:bg-gray-800/60 dark:backdrop-blur rounded-2xl p-4">
         <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-3">
           <span className="font-medium">Monthly Spending — {new Date().getFullYear()}</span>
-          <span className="text-indigo-600 dark:text-indigo-400">This Year</span>
+          <span className="text-[#E43D12]">This Year</span>
         </div>
         <div className="flex items-end gap-1.5 h-20">
           {DEMO_MONTHS.map((m,i) => (
             <div key={`bar-${i}`} className="flex-1 flex flex-col items-center gap-1">
               <div className={`w-full rounded-t-md transition-all duration-500 ${
-                i === active ? 'bg-indigo-500 shadow-lg shadow-indigo-500/40' : 'bg-gray-300 dark:bg-gray-700'
+                i === active ? 'bg-[#E43D12] shadow-lg shadow-[#E43D12]/40' : 'bg-gray-300 dark:bg-gray-700'
               }`} style={{ height:`${(m.total/28700)*100}%`, minHeight:4 }} />
             </div>
           ))}
         </div>
         <div className="flex mt-2">
           {DEMO_MONTHS.map((m,i) => (
-            <span key={`demo-month-${i}`} className={`flex-1 text-center text-[10px] transition-colors ${i === active ? 'text-indigo-600 dark:text-indigo-400 font-bold' : 'text-gray-400 dark:text-gray-600'}`}>{m.name}</span>
+            <span key={`demo-month-${i}`} className={`flex-1 text-center text-[10px] transition-colors ${i === active ? 'text-[#E43D12] font-bold' : 'text-gray-400 dark:text-gray-600'}`}>{m.name}</span>
           ))}
         </div>
       </div>
-      <Link to="/register" className="flex items-center justify-center gap-2 w-full py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl text-sm font-bold hover:shadow-xl hover:shadow-indigo-500/30 transition-all group">
+      <Link to="/register" className="flex items-center justify-center gap-2 w-full py-3.5 bg-gradient-to-r bg-[#E43D12] text-white rounded-2xl text-sm font-bold hover:shadow-xl hover:shadow-[#E43D12]/25 transition-all group">
         Get Your Own Dashboard Free
         <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
       </Link>
@@ -349,7 +349,7 @@ function IPhoneMockup() {
   const screen = MOBILE_SCREENS[activeScreen];
 
   return (
-    <div className="w-full h-full flex flex-col" style={{background:'linear-gradient(135deg, #0f0c29, #302b63, #24243e)'}}>
+    <div className="w-full h-full flex flex-col" style={{background:'linear-gradient(135deg, #200904, #302b63, #24243e)'}}>
       {/* Dynamic Island */}
       <div className="relative flex justify-center pt-3 pb-1 flex-shrink-0">
         <div className="w-24 h-6 bg-black rounded-full flex items-center justify-center gap-1.5">
@@ -387,7 +387,7 @@ function IPhoneMockup() {
       <div className="flex justify-center gap-2 pb-3 pt-2 flex-shrink-0">
         {MOBILE_SCREENS.map((s, i) => (
           <button key={i} onClick={() => setActiveScreen(i)}
-            className={`h-1.5 rounded-full transition-all ${i === activeScreen ? 'bg-indigo-400 w-5' : 'bg-white/30 w-1.5'}`} />
+            className={`h-1.5 rounded-full transition-all ${i === activeScreen ? 'bg-[#E43D12] w-5' : 'bg-white/30 w-1.5'}`} />
         ))}
       </div>
 
@@ -404,7 +404,7 @@ function MacBookMockup() {
   return (
     <div className="relative w-full max-w-2xl mx-auto">
       {/* Glow */}
-      <div className="absolute inset-0 bg-indigo-500/10 blur-3xl rounded-full" />
+      <div className="absolute inset-0 bg-[#E43D12]/10 blur-3xl rounded-full" />
 
       {/* MacBook lid */}
       <div className="relative rounded-t-2xl overflow-hidden shadow-2xl"
@@ -419,9 +419,9 @@ function MacBookMockup() {
 
         {/* Screen bezel */}
         <div className="absolute inset-0 p-3">
-          <div className="w-full h-full rounded-xl overflow-hidden bg-gray-950 flex flex-col">
+          <div className="w-full h-full rounded-xl overflow-hidden bg-[#0d0908] flex flex-col">
             {/* macOS menu bar */}
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-900/80 border-b border-white/5 flex-shrink-0">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-[#1a0f0b]/80 border-b border-white/5 flex-shrink-0">
               <div className="flex gap-1.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
                 <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
@@ -438,9 +438,9 @@ function MacBookMockup() {
             {/* App UI inside MacBook */}
             <div className="flex flex-1 min-h-0 overflow-hidden">
               {/* Sidebar */}
-              <div className="w-28 bg-gray-900 border-r border-white/5 flex-shrink-0 p-2">
+              <div className="w-28 bg-[#1a0f0b] border-r border-white/5 flex-shrink-0 p-2">
                 <div className="flex items-center gap-1.5 mb-3">
-                  <div className="w-5 h-5 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                  <div className="w-5 h-5 rounded-lg bg-gradient-to-br bg-[#E43D12] flex items-center justify-center">
                     <span className="text-white text-[8px] font-black">₹</span>
                   </div>
                   <span className="text-white text-[9px] font-black">SpendWise</span>
@@ -451,7 +451,7 @@ function MacBookMockup() {
                   {icon:'◎', label:'Budget',    active:false},
                   {icon:'⊙', label:'Profile',   active:false},
                 ].map(item => (
-                  <div key={item.label} className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg mb-0.5 ${item.active ? 'bg-indigo-600' : ''}`}>
+                  <div key={item.label} className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg mb-0.5 ${item.active ? 'bg-[#E43D12]' : ''}`}>
                     <span className={`text-[9px] ${item.active ? 'text-white' : 'text-gray-500'}`}>{item.icon}</span>
                     <span className={`text-[8px] font-medium ${item.active ? 'text-white' : 'text-gray-500'}`}>{item.label}</span>
                   </div>
@@ -464,7 +464,7 @@ function MacBookMockup() {
                 {/* Stat cards */}
                 <div className="grid grid-cols-4 gap-1 mb-2">
                   {[
-                    {l:'Total Spent',v:'₹84,320',c:'from-indigo-600 to-indigo-800'},
+                    {l:'Total Spent',v:'₹84,320',c:'bg-[#E43D12]'},
                     {l:'This Month',v:'₹12,450',c:'from-purple-600 to-purple-800'},
                     {l:'Expenses',v:'247',c:'from-amber-500 to-orange-600'},
                     {l:'Avg',v:'₹341',c:'from-rose-500 to-rose-700'},
@@ -480,14 +480,14 @@ function MacBookMockup() {
                   <div className="text-gray-400 text-[7px] mb-1">Monthly Spending</div>
                   <div className="flex items-end gap-0.5 h-8">
                     {[35,55,40,70,45,90,60,80,50,75,40,65].map((h,i) => (
-                      <div key={i} className="flex-1 rounded-t-sm" style={{height:`${h}%`, background: i===9 ? '#6366f1' : 'rgba(99,102,241,0.25)'}} />
+                      <div key={i} className="flex-1 rounded-t-sm" style={{height:`${h}%`, background: i===9 ? '#E43D12' : 'rgba(228,61,18,0.25)'}} />
                     ))}
                   </div>
                 </div>
                 {/* Category bars */}
                 <div className="bg-gray-800/60 rounded-lg p-1.5">
                   <div className="text-gray-400 text-[7px] mb-1">By Category</div>
-                  {[['Food',68,'#6366f1'],['Transport',45,'#8b5cf6'],['Shopping',30,'#ec4899']].map(([cat,pct,color]) => (
+                  {[['Food',68,'#E43D12'],['Transport',45,'#8b5cf6'],['Shopping',30,'#ec4899']].map(([cat,pct,color]) => (
                     <div key={cat} className="flex items-center gap-1 mb-0.5">
                       <span className="text-gray-500 text-[6px] w-10">{cat}</span>
                       <div className="flex-1 h-1 bg-gray-700 rounded-full overflow-hidden">
@@ -533,24 +533,24 @@ export default function HomePage() {
   }, [user]);
 
   return (
-    <div className="min-h-screen bg-gray-950">
+    <div className="min-h-screen bg-[#0d0908]">
       <PublicNavbar />
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section className="relative min-h-screen flex items-center overflow-clip pt-20">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute inset-0" style={{ background:'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99,102,241,0.25) 0%, transparent 70%)' }} />
-          <div className="animate-blob absolute top-40 left-20 w-96 h-96 bg-indigo-400/15 dark:bg-indigo-600/10 rounded-full blur-3xl" />
-          <div className="animate-blob delay-3000 absolute top-60 right-20 w-80 h-80 bg-purple-400/15 dark:bg-purple-600/10 rounded-full blur-3xl" />
-          <div className="animate-blob delay-2000 absolute bottom-20 left-1/2 w-72 h-72 bg-pink-400/10 dark:bg-pink-600/8 rounded-full blur-3xl" />
+          <div className="absolute inset-0" style={{ background:'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(228,61,18,0.25) 0%, transparent 70%)' }} />
+          <div className="animate-blob absolute top-40 left-20 w-96 h-96 bg-[#E43D12]/15 dark:bg-[#E43D12]/10 rounded-full blur-3xl" />
+          <div className="animate-blob delay-3000 absolute top-60 right-20 w-80 h-80 bg-[#D6536D]/12 dark:bg-[#D6536D]/10 rounded-full blur-3xl" />
+          <div className="animate-blob delay-2000 absolute bottom-20 left-1/2 w-72 h-72 bg-[#FFA2B6]/10 dark:bg-[#FFA2B6]/8 rounded-full blur-3xl" />
           <div className="absolute inset-0 opacity-[0.04]"
-            style={{ backgroundImage:'linear-gradient(rgba(99,102,241,1) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,1) 1px,transparent 1px)', backgroundSize:'60px 60px' }} />
-          <div className="absolute inset-0" style={{ background:'radial-gradient(ellipse at center,transparent 40%,var(--bg-vignette,#030712) 100%)' }} className="dark:[--bg-vignette:#030712] [--bg-vignette:#f9fafb]" />
+            style={{ backgroundImage:'linear-gradient(rgba(228,61,18,1) 1px,transparent 1px),linear-gradient(90deg,rgba(228,61,18,1) 1px,transparent 1px)', backgroundSize:'60px 60px' }} />
+          <div className="absolute inset-0" style={{ background:'radial-gradient(ellipse at center,transparent 40%,var(--bg-vignette,#0d0908) 100%)' }} className="dark:[--bg-vignette:#0d0908] [--bg-vignette:#f9fafb]" />
         </div>
 
         {/* Floating 3D icons */}
         <div className="absolute top-32 right-[10%] animate-float delay-100 opacity-20">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-2xl shadow-2xl" style={{ transform:'perspective(400px) rotateY(-20deg) rotateX(10deg)' }}>💸</div>
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br bg-[#E43D12] flex items-center justify-center text-2xl shadow-2xl" style={{ transform:'perspective(400px) rotateY(-20deg) rotateX(10deg)' }}>💸</div>
         </div>
         <div className="absolute top-60 left-[8%] animate-float-slow delay-300 opacity-20">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-xl shadow-2xl" style={{ transform:'perspective(400px) rotateY(15deg) rotateX(-8deg)' }}>📊</div>
@@ -568,8 +568,8 @@ export default function HomePage() {
                   Welcome back, {user.name?.split(' ')[0]}! 👋
                 </div>
               ) : (
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full text-indigo-400 text-sm font-medium">
-                  <span className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" />
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#E43D12]/10 border border-[#E43D12]/30 rounded-full text-[#E43D12] text-sm font-medium">
+                  <span className="w-2 h-2 bg-[#E43D12] rounded-full animate-pulse" />
                   Free & Open Source — MERN Stack
                 </div>
               )}
@@ -590,7 +590,7 @@ export default function HomePage() {
             <div className="animate-slide-up delay-300 flex flex-col sm:flex-row gap-4 mb-12">
               {user ? (
                 <>
-                  <Link to="/dashboard" className="group flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl text-lg font-bold shadow-2xl shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all hover:-translate-y-1">
+                  <Link to="/dashboard" className="group flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r bg-[#E43D12] text-white rounded-2xl text-lg font-bold shadow-2xl shadow-[#E43D12]/25 hover:shadow-[#E43D12]/40 transition-all hover:-translate-y-1">
                     <FiGrid className="w-5 h-5" />Open Dashboard<FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                   <Link to="/expenses" className="flex items-center justify-center gap-2 px-8 py-4 glass text-white rounded-2xl text-lg font-semibold hover:bg-white/10 transition-all hover:-translate-y-1 border border-white/10">
@@ -599,7 +599,7 @@ export default function HomePage() {
                 </>
               ) : (
                 <>
-                  <Link to="/register" className="group flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl text-lg font-bold shadow-2xl shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all hover:-translate-y-1">
+                  <Link to="/register" className="group flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r bg-[#E43D12] text-white rounded-2xl text-lg font-bold shadow-2xl shadow-[#E43D12]/25 hover:shadow-[#E43D12]/40 transition-all hover:-translate-y-1">
                     Start for Free<FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                   <Link to="/pricing" className="flex items-center justify-center gap-2 px-8 py-4 glass text-white rounded-2xl text-lg font-semibold hover:bg-white/10 transition-all hover:-translate-y-1 border border-white/10">
@@ -612,7 +612,7 @@ export default function HomePage() {
             <div className="animate-slide-up delay-400 flex flex-wrap gap-4">
               {['₹0 forever','JWT secured','INR + 8 currencies','Mobile-first'].map((b) => (
                 <div key={b} className="flex items-center gap-1.5 text-gray-600 dark:text-gray-500 text-sm">
-                  <FiCheck className="w-3.5 h-3.5 text-emerald-500" /> {b}
+                  <FiCheck className="w-3.5 h-3.5 text-[#EFB11D]" /> {b}
                 </div>
               ))}
             </div>
@@ -621,8 +621,8 @@ export default function HomePage() {
           {/* 3D Dashboard Card */}
           <div className="animate-slide-up delay-300">
             <div ref={card3dRef} className="relative transition-transform duration-150" style={{ transformStyle:'preserve-3d' }}>
-              <div className="absolute -inset-4 bg-gradient-to-r from-indigo-600/20 via-purple-600/20 to-pink-600/20 rounded-3xl blur-2xl" />
-              <div className="relative glass-dark rounded-3xl p-6 shadow-2xl border border-indigo-500/20" style={{ transform:'translateZ(0)' }}>
+              <div className="absolute -inset-4 bg-gradient-to-r from-[#E43D12]/20 via-[#D6536D]/20 to-[#EFB11D]/20 rounded-3xl blur-2xl" />
+              <div className="relative glass-dark rounded-3xl p-6 shadow-2xl border border-[#E43D12]/20" style={{ transform:'translateZ(0)' }}>
                 <div className="flex items-center gap-2 mb-5 pb-4 border-b border-white/5">
                   <div className="flex gap-1.5">
                     <div className="w-3 h-3 rounded-full bg-red-500/70" />
@@ -636,18 +636,18 @@ export default function HomePage() {
                 {user ? <LiveDashboard stats={stats} formatAmount={formatAmount} /> : <DemoPreview />}
               </div>
               <div className="absolute -top-4 -right-4 animate-float delay-200">
-                <div className="glass-dark rounded-xl p-3 shadow-xl border border-emerald-500/20">
+                <div className="glass-dark rounded-xl p-3 shadow-xl border border-[#EFB11D]/30">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                      <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <div className="w-6 h-6 rounded-full bg-[#EFB11D]/20 flex items-center justify-center">
+                      <div className="w-2 h-2 rounded-full bg-[#EFB11D] animate-pulse" />
                     </div>
-                    <span className="text-emerald-400 text-xs font-semibold">Budget on track</span>
+                    <span className="text-[#EFB11D] text-xs font-semibold">Budget on track</span>
                   </div>
                 </div>
               </div>
               <div className="absolute -bottom-4 -left-4 animate-float-slow delay-400">
-                <div className="glass-dark rounded-xl p-3 shadow-xl border border-indigo-500/20">
-                  <div className="text-indigo-400 text-xs font-semibold">+₹2,400 saved this month 🎉</div>
+                <div className="glass-dark rounded-xl p-3 shadow-xl border border-[#FFA2B6]/30">
+                  <div className="text-[#FFA2B6] text-xs font-semibold">+₹2,400 saved this month 🎉</div>
                 </div>
               </div>
             </div>
@@ -656,11 +656,11 @@ export default function HomePage() {
       </section>
 
       {/* ── TICKER ──────────────────────────────────────────────────────── */}
-      <div className="relative py-4 overflow-clip border-y border-gray-100 dark:border-white/5 bg-indigo-50 dark:bg-indigo-950/40">
+      <div className="relative py-4 overflow-clip border-y border-gray-100 dark:border-white/5 bg-[#fdf3f0] dark:bg-[#E43D12]/8">
         <div className="flex animate-ticker whitespace-nowrap">
           {[...TICKER,...TICKER].map((item,i) => (
-            <span key={i} className="inline-flex items-center text-indigo-600 dark:text-gray-400 text-sm font-medium px-8">
-              {item} <span className="ml-8 text-indigo-600">✦</span>
+            <span key={i} className="inline-flex items-center text-[#E43D12] dark:text-gray-400 text-sm font-medium px-8">
+              {item} <span className="ml-8 text-[#EFB11D]">✦</span>
             </span>
           ))}
         </div>
@@ -669,7 +669,7 @@ export default function HomePage() {
       {/* ── FEATURES — 3D Interactive Cards ────────────────────────────── */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto" >
         <div className="text-center mb-16 reveal">
-          <span className="text-indigo-600 dark:text-indigo-400 text-sm font-bold uppercase tracking-widest">Everything You Need</span>
+          <span className="text-[#E43D12] text-sm font-bold uppercase tracking-widest">Everything You Need</span>
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mt-3 mb-4">Built for real financial clarity</h2>
           <p className="text-gray-500 max-w-2xl mx-auto text-lg">One plan. No feature tiers. No hidden costs. Every feature from day one.</p>
         </div>
@@ -678,32 +678,32 @@ export default function HomePage() {
         <div className="space-y-8">
           {/* Row 1: Dashboard — full width hero card */}
           <div className="reveal">
-            <div className="feature-3d relative overflow-hidden rounded-3xl border border-indigo-500/20 bg-gray-900 p-8 md:p-12"
-              style={{background:'linear-gradient(135deg,#0f0c29 0%,#1a1060 50%,#0f0c29 100%)'}}>
+            <div className="feature-3d relative overflow-hidden rounded-3xl border border-[#E43D12]/20 bg-[#1a0f0b] p-8 md:p-12"
+              style={{background:'linear-gradient(135deg,#200904 0%,#2a0c05 50%,#200904 100%)'}}>
               <div className="absolute inset-0 opacity-[0.04]"
-                style={{backgroundImage:'linear-gradient(rgba(99,102,241,1) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,1) 1px,transparent 1px)',backgroundSize:'40px 40px'}} />
-              <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl" />
+                style={{backgroundImage:'linear-gradient(rgba(228,61,18,1) 1px,transparent 1px),linear-gradient(90deg,rgba(228,61,18,1) 1px,transparent 1px)',backgroundSize:'40px 40px'}} />
+              <div className="absolute top-0 right-0 w-80 h-80 bg-[#E43D12]/10 rounded-full blur-3xl" />
               <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div>
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-indigo-500/15 border border-indigo-500/30 rounded-full text-indigo-400 text-xs font-bold mb-5">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 border rounded-full text-xs font-bold mb-5" style={{background:'rgba(228,61,18,0.12)',borderColor:'rgba(228,61,18,0.3)',color:'#E43D12'}}>
                     <FiPieChart className="w-3.5 h-3.5" /> Feature 01
                   </div>
                   <h3 className="text-3xl font-black text-white mb-4">Smart Dashboard with Live Charts</h3>
                   <p className="text-gray-400 leading-relaxed mb-6">Your spending data visualized in 3 chart types — area chart for monthly trends, pie chart for category breakdown, and bar chart for top spenders. All update in real-time as you add expenses.</p>
                   <div className="flex flex-wrap gap-3">
                     {['Area Chart','Pie Chart','Bar Chart','Real-time','YTD Stats'].map(t => (
-                      <span key={t} className="px-3 py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-lg text-indigo-300 text-xs font-medium">{t}</span>
+                      <span key={t} className="px-3 py-1.5 bg-[#E43D12]/10 border border-[#E43D12]/20 rounded-lg text-[#FFA2B6] text-xs font-medium">{t}</span>
                     ))}
                   </div>
                 </div>
                 {/* Mini dashboard preview */}
-                <div className="bg-gray-900/80 rounded-2xl p-4 border border-white/5">
+                <div className="bg-[#1a0f0b]/80 rounded-2xl p-4 border border-white/5">
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-white text-xs font-bold">Dashboard</span>
-                    <span className="text-indigo-400 text-xs">Live</span>
+                    <span className="text-[#E43D12] text-xs">Live</span>
                   </div>
                   <div className="grid grid-cols-3 gap-2 mb-3">
-                    {[{l:'Total',v:'₹84,320',c:'from-indigo-600 to-indigo-800'},{l:'Month',v:'₹12,450',c:'from-purple-600 to-purple-800'},{l:'Avg',v:'₹341',c:'from-rose-500 to-rose-700'}].map(s => (
+                    {[{l:'Total',v:'₹84,320',c:'bg-[#E43D12]'},{l:'Month',v:'₹12,450',c:'from-purple-600 to-purple-800'},{l:'Avg',v:'₹341',c:'from-rose-500 to-rose-700'}].map(s => (
                       <div key={s.l} className={`p-2 rounded-xl bg-gradient-to-br ${s.c}`}>
                         <div className="text-white text-xs font-black">{s.v}</div>
                         <div className="text-white/60 text-[9px]">{s.l}</div>
@@ -715,17 +715,17 @@ export default function HomePage() {
                     <div className="flex items-end gap-1 h-12">
                       {[35,55,40,70,45,90,60,80,50,88,40,65].map((h,i) => (
                         <div key={i} className="flex-1 rounded-t-sm transition-all"
-                          style={{height:`${h}%`,background: i===9 ? '#6366f1' : 'rgba(99,102,241,0.3)'}} />
+                          style={{height:`${h}%`,background: i===9 ? '#E43D12' : 'rgba(228,61,18,0.3)'}} />
                       ))}
                     </div>
                     <div className="flex mt-1">
                       {['J','F','M','A','M','J','J','A','S','O','N','D'].map((m,i) => (
-                        <span key={`mac-month-${i}`} className={`flex-1 text-center text-[7px] ${i===9?'text-indigo-400 font-bold':'text-gray-600'}`}>{m}</span>
+                        <span key={`mac-month-${i}`} className={`flex-1 text-center text-[7px] ${i===9?'text-[#E43D12] font-bold':'text-gray-600'}`}>{m}</span>
                       ))}
                     </div>
                   </div>
                   <div className="space-y-1.5">
-                    {[['Food & Dining','68%','#6366f1'],['Transport','45%','#8b5cf6'],['Shopping','32%','#ec4899']].map(([cat,pct,color]) => (
+                    {[['Food & Dining','68%','#E43D12'],['Transport','45%','#8b5cf6'],['Shopping','32%','#ec4899']].map(([cat,pct,color]) => (
                       <div key={cat} className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full" style={{background:color}} />
                         <span className="text-gray-400 text-[9px] flex-1">{cat}</span>
@@ -745,8 +745,8 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
               {
-                icon: FiShield, color:'from-purple-500 to-purple-700', num:'02',
-                title:'Budget Alerts', badge:'bg-purple-500/10 border-purple-500/20 text-purple-400',
+                icon: FiShield, color:'from-[#D6536D] to-[#b8344e]', num:'02',
+                title:'Budget Alerts', badge:'bg-[#fdf0f2]0/10 border-[#D6536D]/20 text-[#D6536D]',
                 desc:'Set monthly limits per category. Animated progress bars turn amber at 80%, red when over. Get alerted before you overspend.',
                 preview: (
                   <div className="space-y-2 mt-3">
@@ -791,10 +791,10 @@ export default function HomePage() {
                     <div className="text-gray-400 text-[8px] mb-2 font-mono">expenses-2026.csv</div>
                     <div className="space-y-1">
                       {['title,amount,category,date','Lunch,340,Food,2026-05-09','Uber,180,Transport,2026-05-08','Netflix,649,Bills,2026-05-07'].map((row,i) => (
-                        <div key={i} className={`font-mono text-[7px] ${i===0?'text-indigo-400':'text-gray-400'}`}>{row}</div>
+                        <div key={i} className={`font-mono text-[7px] ${i===0?'text-[#E43D12]':'text-gray-400'}`}>{row}</div>
                       ))}
                     </div>
-                    <div className="mt-3 flex items-center justify-center gap-1.5 py-1.5 bg-emerald-500/15 border border-emerald-500/20 rounded-lg">
+                    <div className="mt-3 flex items-center justify-center gap-1.5 py-1.5 bg-emerald-500/15 border border-[#EFB11D]/30 rounded-lg">
                       <FiDownload className="w-3 h-3 text-emerald-400" />
                       <span className="text-emerald-400 text-[9px] font-bold">Download CSV</span>
                     </div>
@@ -802,15 +802,15 @@ export default function HomePage() {
                 )
               },
             ].map((f) => (
-              <div key={f.title} className="feature-3d reveal group relative p-6 bg-gray-900 rounded-2xl border border-white/5 hover:border-indigo-500/30 overflow-hidden">
+              <div key={f.title} className="feature-3d reveal group relative p-6 bg-[#1a0f0b] rounded-2xl border border-white/5 hover:border-[#E43D12]/30 overflow-hidden">
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{background:'radial-gradient(circle at 50% 0%,rgba(99,102,241,0.1),transparent 70%)'}} />
+                  style={{background:'radial-gradient(circle at 50% 0%,rgba(228,61,18,0.1),transparent 70%)'}} />
                 <div className="relative">
                   <div className="flex items-center gap-3 mb-4">
                     <div className={`w-11 h-11 rounded-2xl bg-gradient-to-br ${f.color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
                       <f.icon className="w-5 h-5 text-white" />
                     </div>
-                    <span className={`text-xs font-bold px-2 py-0.5 rounded-md border ${f.badge}`}>{f.num}</span>
+                    <span className="text-xs font-bold px-2 py-0.5 rounded-md" style={{background:'rgba(228,61,18,0.1)',border:'1px solid rgba(228,61,18,0.25)',color:'#E43D12'}}>{f.num}</span>
                   </div>
                   <h3 className="font-bold text-white text-lg mb-2">{f.title}</h3>
                   <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
@@ -822,8 +822,8 @@ export default function HomePage() {
 
           {/* Row 3: Security + Search side by side */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div className="feature-3d reveal group relative p-7 bg-gray-900 rounded-2xl border border-white/5 hover:border-purple-500/30 overflow-hidden">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-purple-500/5 rounded-full blur-2xl" />
+            <div className="feature-3d reveal group relative p-7 bg-[#1a0f0b] rounded-2xl border border-white/5 hover:border-[#D6536D]/30 overflow-hidden">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-[#fdf0f2]0/5 rounded-full blur-2xl" />
               <div className="relative">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg">
@@ -844,7 +844,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="feature-3d reveal group relative p-7 bg-gray-900 rounded-2xl border border-white/5 hover:border-cyan-500/30 overflow-hidden">
+            <div className="feature-3d reveal group relative p-7 bg-[#1a0f0b] rounded-2xl border border-white/5 hover:border-cyan-500/30 overflow-hidden">
               <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-500/5 rounded-full blur-2xl" />
               <div className="relative">
                 <div className="flex items-center gap-3 mb-5">
@@ -868,16 +868,16 @@ export default function HomePage() {
       </section>
 
       {/* ── IPHONE SECTION — Big, proper iPhone 17 Pro Max shape ──────────── */}
-      <section className="px-4 sm:px-6 overflow-clip relative" style={{background:'linear-gradient(180deg,#030712 0%,#070520 30%,#0a0a1a 70%,#030712 100%)'}}>
+      <section className="px-4 sm:px-6 overflow-clip relative" style={{background:'linear-gradient(180deg,#0d0908 0%,#130604 30%,#150806 70%,#0d0908 100%)'}}>
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-600/5 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#E43D12]/5 rounded-full blur-3xl" />
           <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-purple-600/5 rounded-full blur-3xl" />
         </div>
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center py-24">
           {/* Left: text */}
           <div className="reveal-left order-2 lg:order-1">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-indigo-400 text-xs font-semibold mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#E43D12]/10 border border-[#E43D12]/20 rounded-full text-[#E43D12] text-xs font-semibold mb-6">
               <FiSmartphone className="w-3.5 h-3.5" />
               Mobile First Design
             </div>
@@ -896,8 +896,8 @@ export default function HomePage() {
                 { icon: FiRefreshCw, title:'Real-time sync',             desc:'Every expense syncs instantly across all your devices.' },
               ].map((item) => (
                 <div key={item.title} className="flex gap-4 items-start group">
-                  <div className="w-11 h-11 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-indigo-500/20 group-hover:border-indigo-500/40 transition-all">
-                    <item.icon className="w-5 h-5 text-indigo-400" />
+                  <div className="w-11 h-11 rounded-xl bg-[#E43D12]/10 border border-[#E43D12]/20 flex items-center justify-center flex-shrink-0 group-hover:bg-[#E43D12]/20 group-hover:border-[#E43D12]/40 transition-all">
+                    <item.icon className="w-5 h-5 text-[#E43D12]" />
                   </div>
                   <div>
                     <p className="text-white font-semibold text-sm mb-0.5">{item.title}</p>
@@ -913,10 +913,10 @@ export default function HomePage() {
             <div className="relative">
               {/* Glow rings */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-72 h-[580px] rounded-[54px] bg-indigo-500/8 animate-glow-pulse blur-2xl" />
+                <div className="w-72 h-[580px] rounded-[54px] bg-[#E43D12]/8 animate-glow-pulse blur-2xl" />
               </div>
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-80 h-[620px] rounded-[60px] bg-purple-500/5 animate-glow-pulse delay-1000 blur-3xl" />
+                <div className="w-80 h-[620px] rounded-[60px] bg-[#fdf0f2]0/5 animate-glow-pulse delay-1000 blur-3xl" />
               </div>
 
               {/* Phone wrapper with 3D float */}
@@ -934,7 +934,7 @@ export default function HomePage() {
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[110px] h-[34px] bg-black rounded-b-3xl z-20 flex items-center justify-center gap-3 px-3">
                     {/* Camera array */}
                     <div className="w-3 h-3 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center">
-                      <div className="w-1.5 h-1.5 rounded-full bg-gray-900" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#1a0f0b]" />
                     </div>
                     <div className="w-2 h-2 rounded-full bg-gray-800 border border-gray-700" />
                     <div className="w-1.5 h-1.5 rounded-full bg-gray-700" />
@@ -948,7 +948,7 @@ export default function HomePage() {
 
                 {/* Reflection below */}
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-[200px] h-12 mt-2"
-                  style={{background:'linear-gradient(to bottom,rgba(99,102,241,0.15),transparent)',filter:'blur(8px)',borderRadius:'50%',transform:'translateX(-50%) scaleY(0.3) translateY(-10px)'}} />
+                  style={{background:'linear-gradient(to bottom,rgba(228,61,18,0.15),transparent)',filter:'blur(8px)',borderRadius:'50%',transform:'translateX(-50%) scaleY(0.3) translateY(-10px)'}} />
               </div>
             </div>
           </div>
@@ -956,16 +956,16 @@ export default function HomePage() {
       </section>
 
       {/* ── MACBOOK SECTION — Desktop responsiveness ─────────────────────── */}
-      <section className="py-24 px-4 sm:px-6 overflow-clip relative bg-gray-950">
+      <section className="py-24 px-4 sm:px-6 overflow-clip relative bg-[#0d0908]">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent" />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-[#E43D12]/15 to-transparent" />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-[#E43D12]/15 to-transparent" />
           <div className="absolute top-1/2 left-1/4 w-80 h-80 bg-purple-600/5 rounded-full blur-3xl" />
         </div>
 
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 reveal">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-400 text-xs font-semibold mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#fdf0f2]0/10 border border-[#D6536D]/20 rounded-full text-[#D6536D] text-xs font-semibold mb-6">
               <FiMonitor className="w-3.5 h-3.5" />
               Beautiful on Every Screen
             </div>
@@ -986,8 +986,8 @@ export default function HomePage() {
           {/* Responsive features grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
             {[
-              { icon:'📱', label:'Mobile',  desc:'375px+',  color:'bg-indigo-500/10 border-indigo-500/20'  },
-              { icon:'📟', label:'Tablet',  desc:'768px+',  color:'bg-purple-500/10 border-purple-500/20'  },
+              { icon:'📱', label:'Mobile',  desc:'375px+',  color:'bg-[#E43D12]/10 border-[#E43D12]/20'  },
+              { icon:'📟', label:'Tablet',  desc:'768px+',  color:'bg-[#fdf0f2]0/10 border-[#D6536D]/20'  },
               { icon:'💻', label:'Laptop',  desc:'1024px+', color:'bg-pink-500/10 border-pink-500/20'      },
               { icon:'🖥️', label:'Desktop', desc:'1280px+', color:'bg-emerald-500/10 border-emerald-500/20'},
             ].map((s) => (
@@ -1002,7 +1002,7 @@ export default function HomePage() {
       </section>
 
       {/* ── STATS ───────────────────────────────────────────────────────── */}
-      <section className="py-20 px-4" style={{ background:'linear-gradient(135deg,#312e81 0%,#4c1d95 50%,#1e1b4b 100%)' }}>
+      <section className="py-20 px-4" style={{ background:'linear-gradient(135deg,#6b1a0a 0%,#8b2510 50%,#3d0f08 100%)' }}>
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 reveal">
           {[
             { target:10000, suffix:'+', label:'Expenses Tracked' },
@@ -1014,7 +1014,7 @@ export default function HomePage() {
               <div className="text-4xl md:text-5xl font-black text-white mb-1">
                 <AnimatedNumber target={s.target} prefix={s.prefix} suffix={s.suffix} />
               </div>
-              <div className="text-indigo-300 text-sm">{s.label}</div>
+              <div className="text-[#FFA2B6] text-sm">{s.label}</div>
             </div>
           ))}
         </div>
@@ -1023,18 +1023,18 @@ export default function HomePage() {
       {/* ── TESTIMONIALS ────────────────────────────────────────────────── */}
       <section className="py-24 px-4 max-w-7xl mx-auto">
         <div className="text-center mb-12 reveal">
-          <span className="text-indigo-600 dark:text-indigo-400 text-sm font-bold uppercase tracking-widest">Loved By Users</span>
+          <span className="text-[#E43D12] text-sm font-bold uppercase tracking-widest">Loved By Users</span>
           <h2 className="text-4xl font-black text-gray-900 dark:text-white mt-3">What people say</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {TESTIMONIALS.map((t,i) => (
-            <div key={t.name} className={`reveal delay-${(i+1)*100} p-6 bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-white/5 hover:border-indigo-300 dark:hover:border-indigo-500/20 transition-all card-hover`}>
+            <div key={t.name} className={`reveal delay-${(i+1)*100} p-6 bg-white dark:bg-[#1a0f0b] rounded-2xl border border-gray-100 dark:border-white/5 hover:border-[#E43D12]/30 dark:hover:border-[#E43D12]/20 transition-all card-hover`}>
               <div className="flex gap-1 mb-4">
                 {[...Array(t.rating)].map((_,j) => <FiStar key={j} className="w-4 h-4 fill-amber-400 text-amber-400" />)}
               </div>
               <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-5">"{t.text}"</p>
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">
+                <div className="w-9 h-9 rounded-full bg-gradient-to-br bg-[#E43D12] flex items-center justify-center text-white font-bold text-sm">
                   {t.name.charAt(0)}
                 </div>
                 <div>
@@ -1050,21 +1050,21 @@ export default function HomePage() {
       {/* ── CTA ─────────────────────────────────────────────────────────── */}
       <section className="py-24 px-4">
         <div className="max-w-3xl mx-auto reveal">
-          <div className="relative rounded-3xl overflow-hidden p-12 text-center" style={{ background:'linear-gradient(135deg,#1e1b4b 0%,#312e81 40%,#4c1d95 100%)' }}>
+          <div className="relative rounded-3xl overflow-hidden p-12 text-center" style={{ background:'linear-gradient(135deg,#3d0f08 0%,#6b1a0a 40%,#8b2510 100%)' }}>
             <div className="absolute inset-0 opacity-[0.04]"
               style={{ backgroundImage:'linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px)', backgroundSize:'40px 40px' }} />
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-40 bg-indigo-500/20 rounded-full blur-3xl" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-40 bg-[#E43D12]/20 rounded-full blur-3xl" />
             <div className="relative">
               <h2 className="text-4xl font-black text-white mb-4">
                 {user ? 'Your dashboard awaits.' : 'Start tracking for free.'}
               </h2>
-              <p className="text-indigo-300 mb-8 text-lg">
+              <p className="text-[#FFA2B6] mb-8 text-lg">
                 {user ? `${stats?.totals?.totalExpenses || 0} expenses logged. Keep going!` : 'No credit card. No subscription. 100% free forever.'}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 {user ? (
                   <>
-                    <Link to="/dashboard" className="group flex items-center justify-center gap-2 px-8 py-4 bg-white text-indigo-700 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all hover:-translate-y-1">
+                    <Link to="/dashboard" className="group flex items-center justify-center gap-2 px-8 py-4 bg-white rounded-2xl font-bold text-lg hover:shadow-2xl transition-all hover:-translate-y-1" style={{color:"#E43D12"}}>
                       <FiGrid className="w-5 h-5" />Open Dashboard<FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </Link>
                     <Link to="/expenses" className="flex items-center justify-center gap-2 px-8 py-4 bg-white/10 text-white rounded-2xl font-semibold text-lg hover:bg-white/15 transition-all border border-white/10">
@@ -1073,7 +1073,7 @@ export default function HomePage() {
                   </>
                 ) : (
                   <>
-                    <Link to="/register" className="group flex items-center justify-center gap-2 px-8 py-4 bg-white text-indigo-700 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all hover:-translate-y-1">
+                    <Link to="/register" className="group flex items-center justify-center gap-2 px-8 py-4 bg-white rounded-2xl font-bold text-lg hover:shadow-2xl transition-all hover:-translate-y-1" style={{color:"#E43D12"}}>
                       Create Free Account<FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </Link>
                     <Link to="/about" className="flex items-center justify-center gap-2 px-8 py-4 bg-white/10 text-white rounded-2xl font-semibold text-lg hover:bg-white/15 transition-all border border-white/10">
@@ -1091,14 +1091,14 @@ export default function HomePage() {
       <footer className="border-t border-gray-200 dark:border-white/5 py-8 px-4 bg-white dark:bg-transparent">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br bg-[#E43D12] flex items-center justify-center">
               <span className="text-white font-black text-sm">₹</span>
             </div>
             <span className="font-black text-gray-900 dark:text-white">SpendWise</span>
           </Link>
           <div className="flex gap-6 text-sm text-gray-500 dark:text-gray-600">
             {[['/', 'Home'], ['/about', 'About'], ['/pricing', 'Pricing'], ['/login', 'Login']].map(([to, label]) => (
-              <Link key={to} to={to} className="hover:text-indigo-400 transition">{label}</Link>
+              <Link key={to} to={to} className="hover:text-[#E43D12] transition">{label}</Link>
             ))}
           </div>
           <p className="text-gray-400 dark:text-gray-700 text-sm">© 2025 SpendWise — MIT License 🇮🇳</p>

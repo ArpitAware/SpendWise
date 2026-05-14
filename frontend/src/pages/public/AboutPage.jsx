@@ -18,7 +18,7 @@ function useScrollReveal() {
 }
 
 const VALUES = [
-  { icon: FiCode,   color:'bg-indigo-500/10 border-indigo-500/20 text-indigo-400',  title:'Clean Code',      desc:'Every file is well-commented, modular, and follows industry best practices — MVC, custom hooks, context API.' },
+  { icon: FiCode,   color:'bg-[#E43D12]/10 border-[#E43D12]/20 text-[#E43D12]',  title:'Clean Code',      desc:'Every file is well-commented, modular, and follows industry best practices — MVC, custom hooks, context API.' },
   { icon: FiHeart,  color:'bg-rose-500/10 border-rose-500/20 text-rose-400',        title:'User First',      desc:'Every design decision starts with what makes the experience simpler, faster, and more delightful.' },
   { icon: FiAward,  color:'bg-amber-500/10 border-amber-500/20 text-amber-400',     title:'Portfolio Grade', desc:'Built to showcase real full-stack depth — MongoDB aggregation, JWT refresh rotation, Recharts, Vite.' },
   { icon: FiGlobe,  color:'bg-emerald-500/10 border-emerald-500/20 text-emerald-400', title:'Open Source',   desc:'Free to use, fork, and learn from. The entire codebase is MIT licensed and documented.' },
@@ -30,8 +30,8 @@ const TECH = [
   { name:'React 18',    icon:'⚛️', color:'text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-400/10 border-cyan-200 dark:border-cyan-400/20'   },
   { name:'Node.js',     icon:'🟢', color:'text-lime-600 dark:text-lime-400 bg-lime-50 dark:bg-lime-400/10 border-lime-200 dark:border-lime-400/20'   },
   { name:'Tailwind CSS',icon:'🎨', color:'text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-400/10 border-sky-200 dark:border-sky-400/20'    },
-  { name:'JWT Auth',    icon:'🔐', color:'text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-400/10 border-purple-200 dark:border-purple-400/20' },
-  { name:'Recharts',    icon:'📊', color:'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-400/10 border-indigo-200 dark:border-indigo-400/20' },
+  { name:'JWT Auth',    icon:'🔐', color:'text-[#D6536D] dark:text-[#D6536D] bg-[#fdf0f2] dark:bg-purple-400/10 border-purple-200 dark:border-purple-400/20' },
+  { name:'Recharts',    icon:'📊', color:'text-[#E43D12] dark:text-[#E43D12] bg-[#fdf3f0] dark:bg-[#E43D12]/10 border-[#FFA2B6] dark:border-[#E43D12]/20' },
   { name:'Vite',        icon:'⚡', color:'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-400/10 border-yellow-200 dark:border-yellow-400/20' },
 ];
 
@@ -46,18 +46,18 @@ export default function AboutPage() {
   useScrollReveal();
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950 transition-colors duration-300">
+    <div className="min-h-screen bg-white dark:bg-[#0d0908] transition-colors duration-300">
       <PublicNavbar />
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="pt-24 pb-16 px-4 sm:px-6 text-center relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0" style={{ background:'radial-gradient(ellipse 60% 40% at 50% 0%, rgba(99,102,241,0.15) 0%, transparent 70%)' }} />
-          <div className="animate-blob absolute top-20 left-1/4 w-72 h-72 bg-indigo-600/8 rounded-full blur-3xl" />
+          <div className="absolute inset-0" style={{ background:'radial-gradient(ellipse 60% 40% at 50% 0%, rgba(228,61,18,0.15) 0%, transparent 70%)' }} />
+          <div className="animate-blob absolute top-20 left-1/4 w-72 h-72 bg-[#E43D12]/8 rounded-full blur-3xl" />
           <div className="animate-blob delay-3000 absolute top-20 right-1/4 w-64 h-64 bg-purple-600/8 rounded-full blur-3xl" />
         </div>
         <div className="relative max-w-3xl mx-auto">
-          <div className="animate-slide-up inline-block text-indigo-400 text-sm font-bold uppercase tracking-widest mb-5 px-4 py-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full">
+          <div className="animate-slide-up inline-block text-[#E43D12] text-sm font-bold uppercase tracking-widest mb-5 px-4 py-2 bg-[#E43D12]/10 border border-[#E43D12]/20 rounded-full">
             Our Story
           </div>
           <h1 className="animate-slide-up delay-100 text-5xl md:text-6xl font-black text-gray-900 dark:text-white mb-6 leading-tight">
@@ -76,11 +76,11 @@ export default function AboutPage() {
 
           {/* Left: Photo panel */}
           <div className="lg:col-span-2 relative min-h-80 flex flex-col items-center justify-center p-10"
-            style={{ background:'linear-gradient(135deg,#1e1b4b 0%,#312e81 50%,#1e1b4b 100%)' }}>
+            style={{ background:'linear-gradient(135deg,#3d0f08 0%,#6b1a0a 50%,#3d0f08 100%)' }}>
             <div className="absolute inset-0 opacity-[0.05]"
               style={{ backgroundImage:'linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px)', backgroundSize:'30px 30px' }} />
-            <div className="absolute top-10 right-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-2xl" />
-            <div className="absolute bottom-10 left-10 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl" />
+            <div className="absolute top-10 right-10 w-40 h-40 bg-[#E43D12]/10 rounded-full blur-2xl" />
+            <div className="absolute bottom-10 left-10 w-32 h-32 bg-[#fdf0f2]0/10 rounded-full blur-2xl" />
 
             {/* Avatar — replace src with real photo */}
             <div className="relative z-10 w-36 h-36 rounded-3xl bg-gradient-to-br from-indigo-400 via-purple-500 to-pink-500 flex items-center justify-center text-white text-5xl font-black shadow-2xl shadow-indigo-500/40 mb-6 animate-tilt">
@@ -88,7 +88,7 @@ export default function AboutPage() {
             </div>
             <div className="relative z-10 text-center">
               <p className="text-white text-xl font-black">Your Name</p>
-              <p className="text-indigo-300 text-sm mt-1">Founder & Full-Stack Developer</p>
+              <p className="text-[#FFA2B6] text-sm mt-1">Founder & Full-Stack Developer</p>
             </div>
             <div className="relative z-10 flex flex-wrap gap-2 mt-5 justify-center">
               {['MERN Dev 🚀', 'India 🇮🇳', 'Open Source'].map((t) => (
@@ -100,16 +100,16 @@ export default function AboutPage() {
           </div>
 
           {/* Right: Message */}
-          <div className="lg:col-span-3 bg-gray-50 dark:bg-gray-900 p-10 lg:p-12">
-            <span className="text-indigo-400 text-xs font-bold uppercase tracking-widest block mb-5">
+          <div className="lg:col-span-3 bg-gray-50 dark:bg-[#1a0f0b] p-10 lg:p-12">
+            <span className="text-[#E43D12] text-xs font-bold uppercase tracking-widest block mb-5">
               — A Message from the Founder
             </span>
             <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-6 leading-tight">
-              Built from <span className="text-indigo-400">real frustration,</span><br />
+              Built from <span className="text-[#E43D12]">real frustration,</span><br />
               for real users.
             </h2>
 
-            <blockquote className="border-l-4 border-indigo-500 pl-5 mb-6">
+            <blockquote className="border-l-4 border-[#E43D12] pl-5 mb-6">
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed italic text-lg">
                 "I couldn't find a simple, beautiful expense tracker that worked in ₹ INR and didn't charge me a subscription. So I built one — and made it completely free."
               </p>
@@ -146,7 +146,7 @@ export default function AboutPage() {
       {/* ── Build Timeline ────────────────────────────────────────────────── */}
       <section className="py-20 px-4 sm:px-6 max-w-4xl mx-auto">
         <div className="text-center mb-12 reveal">
-          <span className="text-indigo-600 dark:text-indigo-400 text-sm font-bold uppercase tracking-widest">How It Was Built</span>
+          <span className="text-[#E43D12] dark:text-[#E43D12] text-sm font-bold uppercase tracking-widest">How It Was Built</span>
           <h2 className="text-4xl font-black text-gray-900 dark:text-white mt-3">The build timeline</h2>
         </div>
         <div className="relative">
@@ -156,11 +156,11 @@ export default function AboutPage() {
             {TIMELINE.map((t, i) => (
               <div key={t.year} className={`reveal delay-${(i+1)*100} flex gap-6 items-start`}>
                 <div className="relative flex-shrink-0">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-700 flex items-center justify-center text-white font-black text-xs text-center leading-tight shadow-lg shadow-indigo-500/30">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-700 flex items-center justify-center text-white font-black text-xs text-center leading-tight shadow-lg shadow-[#E43D12]/25">
                     {t.year}
                   </div>
                 </div>
-                <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl p-5 border border-gray-100 dark:border-white/5 flex-1">
+                <div className="bg-gray-50 dark:bg-[#1a0f0b] rounded-2xl p-5 border border-gray-100 dark:border-white/5 flex-1">
                   <h3 className="font-bold text-gray-900 dark:text-white mb-1">{t.label}</h3>
                   <p className="text-gray-600 dark:text-gray-500 text-sm">{t.desc}</p>
                 </div>
@@ -173,12 +173,12 @@ export default function AboutPage() {
       {/* ── Values ───────────────────────────────────────────────────────── */}
       <section className="py-20 px-4 sm:px-6 max-w-6xl mx-auto">
         <div className="text-center mb-12 reveal">
-          <span className="text-indigo-600 dark:text-indigo-400 text-sm font-bold uppercase tracking-widest">What We Stand For</span>
+          <span className="text-[#E43D12] dark:text-[#E43D12] text-sm font-bold uppercase tracking-widest">What We Stand For</span>
           <h2 className="text-4xl font-black text-gray-900 dark:text-white mt-3">Our values</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {VALUES.map((v, i) => (
-            <div key={v.title} className={`reveal delay-${(i%2+1)*100} flex gap-4 p-6 bg-gray-50 dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-white/5 hover:border-indigo-300 dark:hover:border-indigo-500/20 transition-all card-hover`}>
+            <div key={v.title} className={`reveal delay-${(i%2+1)*100} flex gap-4 p-6 bg-gray-50 dark:bg-[#1a0f0b] rounded-2xl border border-gray-100 dark:border-white/5 hover:border-[#E43D12]/30 dark:hover:border-[#E43D12]/20 transition-all card-hover`}>
               <div className={`w-12 h-12 rounded-xl ${v.color} border flex items-center justify-center flex-shrink-0`}>
                 <v.icon className="w-5 h-5" />
               </div>
@@ -192,10 +192,10 @@ export default function AboutPage() {
       </section>
 
       {/* ── Tech Stack ───────────────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6" style={{ background:'linear-gradient(180deg,rgba(99,102,241,0.04) 0%,transparent 100%)' }}>
+      <section className="py-20 px-4 sm:px-6" style={{ background:'linear-gradient(180deg,rgba(228,61,18,0.04) 0%,transparent 100%)' }}>
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12 reveal">
-            <span className="text-indigo-600 dark:text-indigo-400 text-sm font-bold uppercase tracking-widest">Technology</span>
+            <span className="text-[#E43D12] dark:text-[#E43D12] text-sm font-bold uppercase tracking-widest">Technology</span>
             <h2 className="text-4xl font-black text-gray-900 dark:text-white mt-3">Built with modern tools</h2>
           </div>
           <div className="flex flex-wrap gap-3 justify-center reveal">
@@ -214,7 +214,7 @@ export default function AboutPage() {
           <h2 className="text-4xl font-black text-gray-900 dark:text-white mb-4">Ready to start?</h2>
           <p className="text-gray-600 dark:text-gray-500 mb-8 text-lg">Join hundreds of users who track their money smarter with SpendWise.</p>
           <Link to="/register"
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-bold text-lg shadow-2xl shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all hover:-translate-y-1">
+            className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r bg-[#E43D12] text-white rounded-2xl font-bold text-lg shadow-2xl shadow-[#E43D12]/25 hover:shadow-[#E43D12]/40 transition-all hover:-translate-y-1">
             Create Free Account
             <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
